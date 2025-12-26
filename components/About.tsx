@@ -56,10 +56,10 @@ const About: React.FC = () => {
                     src="https://i.postimg.cc/pXv3MLz5/Screenshot-20251225-204830-Whats-App.jpg" 
                     alt="Interior Carretinha" 
                     className="w-full h-full object-cover lazy-image"
-                    loading="eager"
+                    loading="lazy"
+                    decoding="async"
                     width="400"
                     height="400"
-                    decoding="async"
                     onLoad={handleLoad}
                   />
                 </div>
@@ -71,10 +71,10 @@ const About: React.FC = () => {
                     src="https://i.postimg.cc/CL09pxkf/Screenshot-20251225-204814-Whats-App.jpg" 
                     alt="Piscina de Bolinhas" 
                     className="w-full h-full object-cover lazy-image"
-                    loading="eager"
+                    loading="lazy"
+                    decoding="async"
                     width="400"
                     height="400"
-                    decoding="async"
                     onLoad={handleLoad}
                   />
                 </div>
@@ -87,9 +87,9 @@ const About: React.FC = () => {
                     alt="Carretinha Lateral" 
                     className="w-full h-full object-cover lazy-image"
                     loading="lazy"
+                    decoding="async"
                     width="400"
                     height="400"
-                    decoding="async"
                     onLoad={handleLoad}
                   />
                 </div>
@@ -102,9 +102,9 @@ const About: React.FC = () => {
                     alt="Carretinha Brinca Móvel Oficial" 
                     className="w-full h-full object-cover lazy-image"
                     loading="lazy"
+                    decoding="async"
                     width="400"
                     height="400"
-                    decoding="async"
                     onLoad={handleLoad}
                   />
                 </div>

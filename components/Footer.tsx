@@ -31,9 +31,9 @@ const Footer: React.FC = () => {
               alt="Brinca Móvel Oficial Logo Footer" 
               className="w-full h-full object-cover lazy-image"
               loading="lazy"
+              decoding="async"
               width="48"
               height="48"
-              decoding="async"
               onLoad={(e) => (e.currentTarget as HTMLImageElement).classList.add('loaded')}
             />
           </div>

@@ -1,8 +1,20 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Sparkles, MapPin, Palette } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const logoUrl = "https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1";
+
+  // Forçar o carregamento imediato se já estiver no cache devido ao preload
+  useEffect(() => {
+    const img = new Image();
+    img.src = logoUrl;
+    if (img.complete) {
+      setImageLoaded(true);
+    }
+  }, []);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
@@ -64,21 +76,22 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex-1 relative w-full flex justify-center">
-            {/* Reduzido max-w de 750px para 560px (~25% menor) e borda para 12px */}
-            <div className="relative z-10 w-full max-w-[560px] aspect-square rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white transition-transform duration-500 hover:scale-[1.02] bg-white p-0 shimmer-bg animate-bounce-gentle" style={{ animationDuration: '3.5s' }}>
+            {/* Container da imagem principal - Mantido em 720px mas com zoom interno */}
+            <div className={`relative z-10 w-full max-w-[720px] aspect-square rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white transition-all duration-500 hover:scale-[1.02] bg-white p-0 ${!imageLoaded ? 'shimmer-bg' : ''} animate-bounce-gentle`} style={{ animationDuration: '3.5s' }}>
               <img 
-                src="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" 
+                src={logoUrl} 
                 alt="Brinca Móvel Oficial - Logo Principal"
-                /* Escala reduzida de 1.8 para 1.35 para acompanhar a redução de 25% solicitada */
-                className="w-full h-full object-contain lazy-image loaded scale-[1.35]"
-                loading="eager"
+                /* Otimizações de carregamento para a imagem LCP */
                 fetchpriority="high"
+                loading="eager"
+                decoding="sync"
+                className={`w-full h-full object-contain transition-all duration-500 scale-[1.15] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setImageLoaded(true)}
                 width="800"
                 height="800"
-                decoding="async"
               />
             </div>
-            {/* Blob de fundo ajustado para o novo tamanho */}
+            {/* Blob de fundo animado */}
             <div className="absolute -inset-8 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-30" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
