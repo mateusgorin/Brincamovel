@@ -1,6 +1,6 @@
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { X, ZoomIn, Info, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   { 
@@ -93,7 +93,6 @@ const Gallery: React.FC = () => {
       if (e.key === 'ArrowLeft') handlePrev();
     };
     window.addEventListener('keydown', handleKeyDown);
-    // Fixed: replaced removeInnerListener with removeEventListener
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
@@ -105,9 +104,9 @@ const Gallery: React.FC = () => {
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 uppercase tracking-tight">
           Nossa Galeria <span className="inline-block animate-bounce-gentle">📸</span>
         </h2>
-        <p className="text-xl text-gray-600 mb-12">Momentos mágicos capturados em cada evento ✨</p>
+        <p className="text-xl text-gray-600 mb-12">Arraste ou clique para ver mais! ✨</p>
         
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {images.map((img, index) => (
             <div 
               key={index}
@@ -115,21 +114,29 @@ const Gallery: React.FC = () => {
                 setModalImageLoaded(false);
                 setSelectedIndex(index);
               }}
-              className="group relative aspect-square sm:aspect-video overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-4 border-white"
+              className="group relative aspect-square sm:aspect-video overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-2 md:border-4 border-white"
             >
               <img 
                 src={img.url}
                 alt={`Galeria ${index}`}
                 className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
-                loading="lazy"
+                // Otimização: Carregamento imediato e alta prioridade para as primeiras 2 imagens
+                loading={index < 2 ? "eager" : "lazy"}
+                // @ts-ignore - Atributo fetchpriority é suportado pelos navegadores modernos
+                fetchpriority={index < 2 ? "high" : "auto"}
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-pink-500/10 group-hover:bg-transparent transition-colors duration-300"></div>
+              <div className="absolute inset-0 bg-pink-500/5 group-hover:bg-transparent transition-colors duration-300"></div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all">
-                <span className="text-white font-kids text-xs sm:text-base block text-center truncate uppercase tracking-wider">
+                <span className="text-white font-kids text-[10px] sm:text-base block text-center truncate uppercase tracking-widest">
                   {img.title}
                 </span>
+              </div>
+              <div className="absolute top-3 right-3 sm:top-5 sm:right-5">
+                <div className="bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ZoomIn size={16} />
+                </div>
               </div>
             </div>
           ))}
@@ -138,16 +145,16 @@ const Gallery: React.FC = () => {
 
       {currentImage && (
         <div 
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-lg animate-fadeIn p-0 transition-all duration-300"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gray-900/90 backdrop-blur-xl animate-fadeIn p-0 transition-all duration-300"
           onClick={() => setSelectedIndex(null)}
         >
           {/* Header do Modal */}
           <div className="absolute top-0 inset-x-0 p-4 sm:p-8 flex justify-between items-center z-[110] pointer-events-none">
-            <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-sm pointer-events-auto border border-white/10 shadow-lg">
+            <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/20 shadow-lg">
               {selectedIndex! + 1} / {images.length}
             </div>
             <button 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 active:scale-90 border border-white/10 shadow-lg"
+              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 active:scale-95 border border-white/20 shadow-lg"
               onClick={() => setSelectedIndex(null)}
             >
               <X size={24} />
@@ -161,37 +168,37 @@ const Gallery: React.FC = () => {
           >
             {/* Navegação Desktop */}
             <button 
-              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/5"
+              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
               onClick={handlePrev}
             >
               <ChevronLeft size={32} />
             </button>
 
             <button 
-              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/5"
+              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
               onClick={handleNext}
             >
               <ChevronRight size={32} />
             </button>
 
-            {/* Imagem Central com Loader Interno */}
+            {/* Imagem Central */}
             <div className="relative max-w-full max-h-full flex items-center justify-center">
               {!modalImageLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-12 h-12 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
+                  <div className="w-10 h-10 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
                 </div>
               )}
               <img 
                 key={currentImage.url}
                 src={currentImage.url} 
                 alt="Visualização" 
-                className={`max-w-full max-h-[75vh] sm:max-h-[85vh] object-contain transition-opacity duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                className={`max-w-full max-h-[70vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
                 onLoad={() => setModalImageLoaded(true)}
                 decoding="async"
               />
             </div>
 
-            {/* Controles Mobile */}
+            {/* Controles Touch Mobile */}
             <div className="absolute inset-0 flex lg:hidden">
               <div className="w-1/4 h-full" onClick={handlePrev}></div>
               <div className="w-2/4 h-full" onClick={() => setSelectedIndex(null)}></div>
@@ -201,27 +208,27 @@ const Gallery: React.FC = () => {
           
           {/* Legenda na Base */}
           <div 
-            className="w-full bg-gradient-to-t from-gray-950/60 to-transparent pt-16 pb-8 px-6 sm:px-12 text-center pointer-events-none"
+            className="w-full bg-gradient-to-t from-gray-900/80 to-transparent pt-20 pb-10 px-6 sm:px-12 text-center pointer-events-none"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="max-w-3xl mx-auto pointer-events-auto">
-              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-lg">
+              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-xl">
                 {currentImage.title}
               </h3>
-              <p className="text-sm sm:text-lg text-gray-300 leading-relaxed font-medium">
+              <p className="text-sm sm:text-lg text-gray-200 leading-relaxed font-medium drop-shadow-md">
                 {currentImage.description}
               </p>
               
-              <div className="flex items-center justify-center gap-8 mt-6 sm:hidden">
+              <div className="flex items-center justify-center gap-10 mt-8 sm:hidden">
                 <button 
                   onClick={handlePrev}
-                  className="bg-white/10 text-white p-3 rounded-full active:bg-white/20 border border-white/10"
+                  className="bg-white/10 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button 
                   onClick={handleNext}
-                  className="bg-white/10 text-white p-3 rounded-full active:bg-white/20 border border-white/10"
+                  className="bg-white/10 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
                 >
                   <ChevronRight size={24} />
                 </button>
