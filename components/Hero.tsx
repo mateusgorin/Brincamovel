@@ -64,15 +64,16 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex-1 relative w-full">
-            <div className="relative z-10 w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white transition-transform duration-500 hover:scale-[1.02] bg-pink-100 animate-bounce-gentle" style={{ animationDuration: '3s' }}>
+            <div className="relative z-10 w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white transition-transform duration-500 hover:scale-[1.02] bg-pink-100 shimmer-bg animate-bounce-gentle" style={{ animationDuration: '3s' }}>
               <img 
                 src="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg" 
                 alt="Brinca Móvel Oficial - Playground Móvel Raro em Brasília"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover lazy-image loaded"
                 loading="eager"
+                fetchpriority="high"
                 width="800"
                 height="600"
-                style={{ fetchPriority: 'high' } as any}
+                decoding="async"
               />
             </div>
             {/* Blob de fundo animado */}

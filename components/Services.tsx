@@ -95,15 +95,40 @@ const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Adicionando Pintura Facial como um destaque extra já que é mencionado no branding */}
-        <div className="mt-16 bg-pink-50 p-8 rounded-[3rem] border-4 border-pink-200 inline-block max-w-2xl transform hover:scale-[1.01] transition-transform group">
-          <div className="flex flex-col md:flex-row items-center gap-6 text-left">
-            <div className="bg-white p-4 rounded-full shadow-md">
-              <Palette className="text-pink-500 group-hover:animate-wiggle" size={48} />
+        {/* Destaque Extra: Pintura Facial & Artística - AZUL ESCURECIDO */}
+        <div className="mt-20 bg-gradient-to-br from-blue-100 to-white p-8 md:p-12 rounded-[3.5rem] border-4 border-blue-200 inline-block max-w-4xl transform hover:scale-[1.01] transition-all shadow-xl group relative overflow-hidden">
+          {/* Decoração sutil de fundo */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-10 text-left relative z-10">
+            {/* Imagem de Destaque da Pintura */}
+            <div className="w-48 h-48 md:w-56 md:h-56 shrink-0 relative">
+               <div className="absolute inset-0 bg-blue-300 rounded-[2rem] rotate-6 animate-pulse"></div>
+               <img 
+                 src="https://www.dropbox.com/scl/fi/n3rw94nb7fnqsw2qmwj1d/WhatsApp-Image-2025-12-26-at-14.58.19.jpeg?rlkey=v6cnutdwc6hymmjud1ntcl9n9&st=24c6lyix&raw=1" 
+                 alt="Exemplo de Pintura Facial" 
+                 className="w-full h-full object-cover rounded-[2rem] border-4 border-white shadow-lg relative z-10 -rotate-3 transition-transform group-hover:rotate-0 duration-500"
+               />
             </div>
+
             <div>
-              <h3 className="text-2xl font-bold text-pink-600 mb-2">Pintura Facial & Artística <span className="inline-block animate-wiggle">🎨</span></h3>
-              <p className="text-gray-700">Além da carretinha, levamos cores e encanto para o rosto das crianças com tintas antialérgicas e muito brilho!</p>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-white p-3 rounded-2xl shadow-sm">
+                  {/* Ícone de Paleta agora com animação contínua (animate-wiggle) */}
+                  <Palette className="text-blue-600 animate-wiggle" size={32} />
+                </div>
+                {/* Removido o emoji para deixar apenas o ícone animado */}
+                <h3 className="text-3xl md:text-4xl font-bold text-blue-700">Pintura Facial & Artística</h3>
+              </div>
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                Além da carretinha, levamos cores e encanto para o rosto das crianças! Nossos artistas usam tintas <span className="text-blue-600 font-bold">antialérgicas</span> de alta qualidade, muito brilho e criatividade para transformar cada pequeno em seu personagem favorito.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="bg-white px-4 py-1.5 rounded-full text-blue-700 font-bold border border-blue-200 shadow-sm text-sm">✨ Tintas Antialérgicas</span>
+                <span className="bg-white px-4 py-1.5 rounded-full text-blue-700 font-bold border border-blue-200 shadow-sm text-sm">💎 Glitter e Pedrarias</span>
+                <span className="bg-white px-4 py-1.5 rounded-full text-blue-700 font-bold border border-blue-200 shadow-sm text-sm">🦋 Desenhos Criativos</span>
+                <span className="bg-white px-4 py-1.5 rounded-full text-blue-700 font-bold border border-blue-200 shadow-sm text-sm">🎉 Diversão Garantida</span>
+              </div>
             </div>
           </div>
         </div>
