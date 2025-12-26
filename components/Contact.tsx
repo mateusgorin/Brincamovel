@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Instagram, Mail, Clock } from 'lucide-react';
+import { MessageCircle, Phone, Instagram } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -72,12 +72,6 @@ Aguardo o retorno! ✨`;
                 </div>
                 <span>@brincamovel.oficial</span>
               </a>
-              <div className="flex items-center justify-center lg:justify-start space-x-4 group">
-                <div className="bg-white/20 p-3 rounded-full group-hover:bg-white/30">
-                  <Mail size={24} className="group-hover:animate-bounce-gentle" />
-                </div>
-                <span>contato@brincamovel.com.br</span>
-              </div>
             </div>
           </div>
           

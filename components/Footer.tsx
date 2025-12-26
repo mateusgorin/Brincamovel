@@ -65,16 +65,18 @@ const Footer: React.FC = () => {
             
             <p>© {new Date().getFullYear()} Brinca Móvel Oficial. Todos os direitos reservados.</p>
             
-            <div className="pt-2">
+            <div className="pt-4 mt-2">
               <a 
                 href="https://www.gorinsolucoes.com.br" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1 text-gray-400 hover:text-blue-500 transition-colors group"
+                className="inline-flex items-center space-x-2 bg-gray-50 border border-gray-200 rounded-full px-5 py-2 transition-all duration-300 hover:shadow-md hover:border-blue-300 hover:bg-white group"
               >
-                <span>Desenvolvido por</span>
-                <span className="font-bold border-b border-transparent group-hover:border-blue-500">Gorin Soluções</span>
-                <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="text-gray-500 font-medium">Desenvolvido por</span>
+                <span className="font-extrabold text-blue-600 group-hover:text-blue-700 tracking-wide flex items-center gap-1">
+                  Gorin Soluções
+                  <ExternalLink size={14} className="text-blue-400 group-hover:translate-x-0.5 transition-transform" />
+                </span>
               </a>
             </div>
           </div>
