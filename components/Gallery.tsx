@@ -72,21 +72,24 @@ const Gallery: React.FC = () => {
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
+  const isFirst = selectedIndex === 0;
+  const isLast = selectedIndex === images.length - 1;
+
   const handleNext = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
-    if (selectedIndex !== null) {
+    if (selectedIndex !== null && !isLast) {
       setModalImageLoaded(false);
-      setSelectedIndex((selectedIndex + 1) % images.length);
+      setSelectedIndex(selectedIndex + 1);
     }
-  }, [selectedIndex]);
+  }, [selectedIndex, isLast]);
 
   const handlePrev = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
-    if (selectedIndex !== null) {
+    if (selectedIndex !== null && !isFirst) {
       setModalImageLoaded(false);
-      setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
+      setSelectedIndex(selectedIndex - 1);
     }
-  }, [selectedIndex]);
+  }, [selectedIndex, isFirst]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
@@ -169,7 +172,7 @@ const Gallery: React.FC = () => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Header do Modal: Absoluto no Desktop, Relativo no Mobile */}
+          {/* Header do Modal */}
           <div className="w-full p-6 sm:p-8 flex justify-between items-center z-[110] pointer-events-none sm:absolute sm:top-0 sm:left-0 mt-2 sm:mt-0">
             <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/20 shadow-lg">
               {selectedIndex! + 1} / {images.length}
@@ -182,25 +185,29 @@ const Gallery: React.FC = () => {
             </button>
           </div>
 
-          {/* Área Principal da Imagem: Ocupa todo o espaço e centraliza */}
+          {/* Área Principal da Imagem */}
           <div 
             className="relative w-full flex-1 flex flex-col items-center justify-center px-4 sm:px-8 py-0"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Navegação Desktop lateral */}
-            <button 
-              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
-              onClick={handlePrev}
-            >
-              <ChevronLeft size={32} />
-            </button>
+            {/* Navegação Desktop lateral - Escondida se for a primeira/última */}
+            {!isFirst && (
+              <button 
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+                onClick={handlePrev}
+              >
+                <ChevronLeft size={32} />
+              </button>
+            )}
 
-            <button 
-              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
-              onClick={handleNext}
-            >
-              <ChevronRight size={32} />
-            </button>
+            {!isLast && (
+              <button 
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+                onClick={handleNext}
+              >
+                <ChevronRight size={32} />
+              </button>
+            )}
 
             {/* Imagem Centralizada */}
             <div className="relative w-full h-full flex items-center justify-center py-4 sm:py-0">
@@ -227,7 +234,7 @@ const Gallery: React.FC = () => {
             </div>
           </div>
           
-          {/* Legenda: Relativa no Mobile, Absoluta no Desktop */}
+          {/* Legenda */}
           <div 
             className="w-full bg-gradient-to-t from-gray-900 to-transparent pt-12 pb-8 px-6 sm:px-12 text-center sm:absolute sm:bottom-0 sm:left-0 z-[110] pointer-events-none"
             onClick={(e) => e.stopPropagation()}
@@ -240,21 +247,8 @@ const Gallery: React.FC = () => {
                 {currentImage.description}
               </p>
               
-              {/* Controles Mobile Inferiores */}
-              <div className="flex items-center justify-center gap-12 mt-6 sm:hidden">
-                <button 
-                  onClick={handlePrev}
-                  className="bg-white/5 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <button 
-                  onClick={handleNext}
-                  className="bg-white/5 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </div>
+              {/* No Mobile os botões foram removidos conforme solicitado */}
+              <div className="h-6 sm:hidden"></div>
             </div>
           </div>
         </div>
