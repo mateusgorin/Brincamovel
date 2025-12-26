@@ -63,21 +63,23 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex-1 relative w-full">
-            <div className="relative z-10 w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white transition-transform duration-500 hover:scale-[1.02] bg-pink-100 shimmer-bg animate-bounce-gentle" style={{ animationDuration: '3s' }}>
+          <div className="flex-1 relative w-full flex justify-center">
+            {/* Reduzido max-w de 750px para 560px (~25% menor) e borda para 12px */}
+            <div className="relative z-10 w-full max-w-[560px] aspect-square rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white transition-transform duration-500 hover:scale-[1.02] bg-white p-0 shimmer-bg animate-bounce-gentle" style={{ animationDuration: '3.5s' }}>
               <img 
-                src="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg" 
-                alt="Brinca Móvel Oficial - Playground Móvel Raro em Brasília"
-                className="w-full h-full object-cover lazy-image loaded"
+                src="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" 
+                alt="Brinca Móvel Oficial - Logo Principal"
+                /* Escala reduzida de 1.8 para 1.35 para acompanhar a redução de 25% solicitada */
+                className="w-full h-full object-contain lazy-image loaded scale-[1.35]"
                 loading="eager"
                 fetchpriority="high"
                 width="800"
-                height="600"
+                height="800"
                 decoding="async"
               />
             </div>
-            {/* Blob de fundo animado */}
-            <div className="absolute -inset-6 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-40" style={{ animationDelay: '1.5s' }}></div>
+            {/* Blob de fundo ajustado para o novo tamanho */}
+            <div className="absolute -inset-8 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-30" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
       </div>
