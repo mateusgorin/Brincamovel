@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
@@ -29,12 +29,12 @@ const images = [
     description: "Estrutura compacta que ocupa apenas uma vaga de carro, facilitando a logística em qualquer local."
   },
   { 
-    url: 'https://i.postimg.cc/CL09pxkf/Screenshot-20251225-204814-Whats-App.jpg', 
+    url: 'https://i.postimg.cc/bNP4fwkn/Screenshot-20251225-204725-Whats-App.jpg', 
     title: <>Mar de Bolinhas <span className="inline-block animate-bounce-gentle">🎈</span></>,
     description: "Milhares de bolinhas coloridas e higienizadas para mergulhos de pura alegria."
   },
   { 
-    url: 'https://i.postimg.cc/bNP4fwkn/Screenshot-20251225-204725-Whats-App.jpg', 
+    url: 'https://i.postimg.cc/CL09pxkf/Screenshot-20251225-204814-Whats-App.jpg', 
     title: <>Espaço Interno <span className="inline-block animate-bounce-gentle">🏠</span></>,
     description: "Ambiente seguro, com proteção em todas as quinas e visibilidade total para os pais."
   },
@@ -68,8 +68,12 @@ const images = [
 const Gallery: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
+  
+  // Refs para controle de Swipe (Gesto de deslizar)
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
-  const handleNext = useCallback((e?: React.MouseEvent) => {
+  const handleNext = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
       setModalImageLoaded(false);
@@ -77,13 +81,41 @@ const Gallery: React.FC = () => {
     }
   }, [selectedIndex]);
 
-  const handlePrev = useCallback((e?: React.MouseEvent) => {
+  const handlePrev = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
       setModalImageLoaded(false);
       setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
     }
   }, [selectedIndex]);
+
+  // Handlers para os gestos de toque
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const diff = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (diff > minSwipeDistance) {
+      // Deslizou para a esquerda (próxima)
+      handleNext();
+    } else if (diff < -minSwipeDistance) {
+      // Deslizou para a direita (anterior)
+      handlePrev();
+    }
+
+    // Resetar valores
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -120,9 +152,8 @@ const Gallery: React.FC = () => {
                 src={img.url}
                 alt={`Galeria ${index}`}
                 className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
-                // Otimização: Carregamento imediato e alta prioridade para as primeiras 2 imagens
                 loading={index < 2 ? "eager" : "lazy"}
-                // @ts-ignore - Atributo fetchpriority é suportado pelos navegadores modernos
+                // @ts-ignore
                 fetchpriority={index < 2 ? "high" : "auto"}
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
                 decoding="async"
@@ -147,6 +178,9 @@ const Gallery: React.FC = () => {
         <div 
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gray-900/90 backdrop-blur-xl animate-fadeIn p-0 transition-all duration-300"
           onClick={() => setSelectedIndex(null)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Header do Modal */}
           <div className="absolute top-0 inset-x-0 p-4 sm:p-8 flex justify-between items-center z-[110] pointer-events-none">
@@ -166,7 +200,7 @@ const Gallery: React.FC = () => {
             className="relative w-full flex-1 flex items-center justify-center p-4 sm:p-8 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Navegação Desktop */}
+            {/* Navegação Desktop (Setinhas) */}
             <button 
               className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
               onClick={handlePrev}
@@ -198,7 +232,7 @@ const Gallery: React.FC = () => {
               />
             </div>
 
-            {/* Controles Touch Mobile */}
+            {/* Controles Touch Invisíveis para clique (além do swipe) */}
             <div className="absolute inset-0 flex lg:hidden">
               <div className="w-1/4 h-full" onClick={handlePrev}></div>
               <div className="w-2/4 h-full" onClick={() => setSelectedIndex(null)}></div>
@@ -219,6 +253,7 @@ const Gallery: React.FC = () => {
                 {currentImage.description}
               </p>
               
+              {/* Navegação Mobile (Setinhas Inferiores) */}
               <div className="flex items-center justify-center gap-10 mt-8 sm:hidden">
                 <button 
                   onClick={handlePrev}
