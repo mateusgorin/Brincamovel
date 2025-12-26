@@ -66,12 +66,13 @@ const images = [
 ];
 
 const Gallery: React.FC = () => {
-  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
 
   const handleNext = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
+      setModalImageLoaded(false);
       setSelectedIndex((selectedIndex + 1) % images.length);
     }
   }, [selectedIndex]);
@@ -79,93 +80,54 @@ const Gallery: React.FC = () => {
   const handlePrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
+      setModalImageLoaded(false);
       setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
     }
   }, [selectedIndex]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const img = entry.target as HTMLImageElement;
-            const src = img.getAttribute('data-src');
-            
-            if (src) {
-              img.src = src;
-              img.removeAttribute('data-src');
-              observer.unobserve(img);
-            }
-          }
-        });
-      },
-      {
-        rootMargin: '200px',
-        threshold: 0.01,
-      }
-    );
-
-    imageRefs.current.forEach((img) => {
-      if (img) observer.observe(img);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedIndex === null) return;
-      
       if (e.key === 'Escape') setSelectedIndex(null);
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'ArrowLeft') handlePrev();
     };
-    
     window.addEventListener('keydown', handleKeyDown);
+    // Fixed: replaced removeInnerListener with removeEventListener
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
-
-  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.classList.add('loaded');
-  };
 
   const currentImage = selectedIndex !== null ? images[selectedIndex] : null;
 
   return (
     <section id="galeria" className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Galeria da Carretinha <span className="inline-block animate-bounce-gentle">📸</span></h2>
-        <p className="text-xl text-gray-600 mb-12">Navegue pelas fotos e conheça cada detalhe! ✨</p>
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 uppercase tracking-tight">
+          Nossa Galeria <span className="inline-block animate-bounce-gentle">📸</span>
+        </h2>
+        <p className="text-xl text-gray-600 mb-12">Momentos mágicos capturados em cada evento ✨</p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {images.map((img, index) => (
             <div 
               key={index}
-              onClick={() => setSelectedIndex(index)}
-              className="group relative aspect-video overflow-hidden rounded-[2.5rem] cursor-pointer shadow-lg border-4 border-pink-50 transition-all hover:shadow-2xl bg-pink-50/50 hover:border-pink-200 shimmer-bg"
+              onClick={() => {
+                setModalImageLoaded(false);
+                setSelectedIndex(index);
+              }}
+              className="group relative aspect-square sm:aspect-video overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-4 border-white"
             >
               <img 
-                ref={(el) => {
-                  if (el) imageRefs.current[index] = el;
-                }}
-                data-src={img.url}
-                alt="Carretinha"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image"
-                width="640"
-                height="360"
+                src={img.url}
+                alt={`Galeria ${index}`}
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
+                loading="lazy"
+                onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
                 decoding="async"
-                onLoad={handleLoad}
               />
-              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                 <div className="bg-white/95 p-4 rounded-full text-pink-500 transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center space-x-2">
-                    <ZoomIn size={24} />
-                    <span className="font-bold font-kids">Ver Detalhes</span>
-                 </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
-                <span className="text-white font-kids text-2xl drop-shadow-md transform translate-y-4 group-hover:translate-y-0 transition-transform px-4 text-center">
+              <div className="absolute inset-0 bg-pink-500/10 group-hover:bg-transparent transition-colors duration-300"></div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all">
+                <span className="text-white font-kids text-xs sm:text-base block text-center truncate uppercase tracking-wider">
                   {img.title}
                 </span>
               </div>
@@ -176,89 +138,90 @@ const Gallery: React.FC = () => {
 
       {currentImage && (
         <div 
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md animate-fadeIn transition-all"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-lg animate-fadeIn p-0 transition-all duration-300"
           onClick={() => setSelectedIndex(null)}
         >
-          {/* Botão Fechar */}
-          <button 
-            className="absolute top-4 right-4 md:top-8 md:right-8 bg-white/10 hover:bg-white/30 text-white p-4 rounded-full transition-all z-20 hover:scale-110 active:scale-90"
-            onClick={() => setSelectedIndex(null)}
-          >
-            <X size={32} />
-          </button>
-
-          {/* Botão Anterior */}
-          <button 
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 text-white p-4 rounded-full transition-all z-20 hover:scale-110 active:scale-90 hidden sm:block"
-            onClick={handlePrev}
-          >
-            <ChevronLeft size={48} />
-          </button>
-
-          {/* Botão Próximo */}
-          <button 
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 text-white p-4 rounded-full transition-all z-20 hover:scale-110 active:scale-90 hidden sm:block"
-            onClick={handleNext}
-          >
-            <ChevronRight size={48} />
-          </button>
-          
-          <div 
-            className="relative max-w-5xl w-full flex flex-col items-center bg-white rounded-[3rem] overflow-hidden shadow-2xl animate-fadeIn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Contador de Imagens */}
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-pink-500/80 text-white px-4 py-1 rounded-full font-bold text-sm z-20">
+          {/* Header do Modal */}
+          <div className="absolute top-0 inset-x-0 p-4 sm:p-8 flex justify-between items-center z-[110] pointer-events-none">
+            <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-sm pointer-events-auto border border-white/10 shadow-lg">
               {selectedIndex! + 1} / {images.length}
             </div>
+            <button 
+              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 active:scale-90 border border-white/10 shadow-lg"
+              onClick={() => setSelectedIndex(null)}
+            >
+              <X size={24} />
+            </button>
+          </div>
 
-            <div className="relative w-full aspect-video md:aspect-[16/9] overflow-hidden bg-gray-100 shimmer-bg group/modal">
+          {/* Área Principal da Imagem */}
+          <div 
+            className="relative w-full flex-1 flex items-center justify-center p-4 sm:p-8 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Navegação Desktop */}
+            <button 
+              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/5"
+              onClick={handlePrev}
+            >
+              <ChevronLeft size={32} />
+            </button>
+
+            <button 
+              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/5"
+              onClick={handleNext}
+            >
+              <ChevronRight size={32} />
+            </button>
+
+            {/* Imagem Central com Loader Interno */}
+            <div className="relative max-w-full max-h-full flex items-center justify-center">
+              {!modalImageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-12 h-12 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
+                </div>
+              )}
               <img 
-                key={currentImage.url} // Força a atualização da animação ao trocar de imagem
+                key={currentImage.url}
                 src={currentImage.url} 
-                alt="Zoom" 
-                className="w-full h-full object-contain animate-fadeIn"
+                alt="Visualização" 
+                className={`max-w-full max-h-[75vh] sm:max-h-[85vh] object-contain transition-opacity duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setModalImageLoaded(true)}
                 decoding="async"
               />
-              
-              {/* Controles Mobile/Touch */}
-              <div className="absolute inset-0 flex sm:hidden">
-                <div className="w-1/2 h-full" onClick={handlePrev}></div>
-                <div className="w-1/2 h-full" onClick={handleNext}></div>
-              </div>
             </div>
-            
-            <div className="w-full p-8 md:p-10 text-center bg-white">
-              <div className="flex flex-col items-center gap-2 mb-4">
-                <div className="flex items-center justify-center gap-3">
-                  <div className="bg-pink-100 p-2 rounded-xl text-pink-500">
-                    <Info size={24} />
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-kids font-bold text-gray-800">
-                    {currentImage.title}
-                  </h3>
-                </div>
-              </div>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6">
+
+            {/* Controles Mobile */}
+            <div className="absolute inset-0 flex lg:hidden">
+              <div className="w-1/4 h-full" onClick={handlePrev}></div>
+              <div className="w-2/4 h-full" onClick={() => setSelectedIndex(null)}></div>
+              <div className="w-1/4 h-full" onClick={handleNext}></div>
+            </div>
+          </div>
+          
+          {/* Legenda na Base */}
+          <div 
+            className="w-full bg-gradient-to-t from-gray-950/60 to-transparent pt-16 pb-8 px-6 sm:px-12 text-center pointer-events-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="max-w-3xl mx-auto pointer-events-auto">
+              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-lg">
+                {currentImage.title}
+              </h3>
+              <p className="text-sm sm:text-lg text-gray-300 leading-relaxed font-medium">
                 {currentImage.description}
               </p>
               
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-8 mt-6 sm:hidden">
                 <button 
                   onClick={handlePrev}
-                  className="sm:hidden bg-gray-100 hover:bg-gray-200 text-gray-700 p-3 rounded-full transition-all"
+                  className="bg-white/10 text-white p-3 rounded-full active:bg-white/20 border border-white/10"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button 
-                  onClick={() => setSelectedIndex(null)}
-                  className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-kids text-xl shadow-lg transition-all hover:scale-105 active:scale-95"
-                >
-                  Fechar Galeria
-                </button>
-                <button 
                   onClick={handleNext}
-                  className="sm:hidden bg-gray-100 hover:bg-gray-200 text-gray-700 p-3 rounded-full transition-all"
+                  className="bg-white/10 text-white p-3 rounded-full active:bg-white/20 border border-white/10"
                 >
                   <ChevronRight size={24} />
                 </button>
