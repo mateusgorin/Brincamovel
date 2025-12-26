@@ -64,10 +64,10 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex-1 relative w-full">
-            <div className="relative z-10 w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white transition-transform duration-500 hover:scale-[1.02] bg-pink-100">
+            <div className="relative z-10 w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white transition-transform duration-500 hover:scale-[1.02] bg-pink-100 animate-bounce-gentle" style={{ animationDuration: '3s' }}>
               <img 
                 src="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg" 
-                alt="Brinca Móvel - Playground Móvel Raro em Brasília"
+                alt="Brinca Móvel Oficial - Playground Móvel Raro em Brasília"
                 className="w-full h-full object-cover"
                 loading="eager"
                 width="800"
@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
               />
             </div>
             {/* Blob de fundo animado */}
-            <div className="absolute -inset-6 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-40"></div>
+            <div className="absolute -inset-6 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-40" style={{ animationDelay: '1.5s' }}></div>
           </div>
         </div>
       </div>

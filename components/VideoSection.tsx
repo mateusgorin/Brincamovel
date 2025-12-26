@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Play, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const VideoSection: React.FC = () => {
   return (
@@ -16,36 +16,37 @@ const VideoSection: React.FC = () => {
           A Magia em Movimento <span className="inline-block animate-wiggle">🎥</span>
         </h2>
         <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Veja com seus próprios olhos como o Brinca Móvel transforma o ambiente e faz a alegria da criançada em tempo real!
+          Veja com seus próprios olhos como o Brinca Móvel Oficial transforma o ambiente e faz a alegria da criançada em tempo real!
         </p>
 
-        <div className="relative group">
-          {/* Moldura do Vídeo */}
-          <div className="relative aspect-video rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white bg-gray-100 transition-transform duration-500 hover:scale-[1.01]">
+        {/* Container ajustado para vídeo Vertical (Tipo Stories/Reels) */}
+        <div className="relative group max-w-[320px] md:max-w-[360px] mx-auto">
+          {/* Moldura do Vídeo Nativo - Formato 9:16 */}
+          <div className="relative aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-black transition-transform duration-500 hover:scale-[1.01]">
             <video 
               className="w-full h-full object-cover"
               controls
-              poster="https://i.postimg.cc/15Sb13wX/Screenshot-20251225-204842-Whats-App.jpg"
+              playsInline
+              poster="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg"
+              preload="metadata"
             >
-              <source src="" type="video/mp4" />
-              Seu navegador não suporta a reprodução de vídeos.
+              <source 
+                src="https://www.dropbox.com/scl/fi/mcwrkcvd0c4iyx0wm89fa/WhatsApp-Video-2025-12-26-at-09.29.28.mp4?rlkey=bjvsm1qj7b3e818zmrq6flko1&st=bj6zxgwj&raw=1" 
+                type="video/mp4" 
+              />
+              Seu navegador não suporta a exibição de vídeos nativos.
             </video>
-            
-            {/* Overlay visual para convite ao play */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors pointer-events-none">
-              <div className="bg-pink-500/90 text-white p-5 rounded-full shadow-2xl transform transition-transform group-hover:scale-125">
-                <Play size={40} fill="currentColor" className="group-hover:animate-pulse" />
-              </div>
-            </div>
           </div>
           
           {/* Legenda Flutuante */}
-          <div className="mt-8 inline-flex items-center space-x-2 bg-white px-8 py-3 rounded-full shadow-md border-2 border-pink-100">
-            <span className="text-yellow-500 inline-block animate-spin-slow">⭐</span>
-            <p className="text-pink-600 font-bold font-kids text-lg">
-              "A diversão que não para!"
-            </p>
-            <span className="text-yellow-500 inline-block animate-spin-slow">⭐</span>
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow-md border-2 border-pink-100">
+              <span className="text-yellow-500 inline-block animate-spin-slow">⭐</span>
+              <p className="text-pink-600 font-bold font-kids text-lg whitespace-nowrap">
+                "A diversão que não para!"
+              </p>
+              <span className="text-yellow-500 inline-block animate-spin-slow">⭐</span>
+            </div>
           </div>
         </div>
       </div>

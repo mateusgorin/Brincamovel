@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
   const handleWhatsAppSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const message = `Olá Brinca Móvel! Gostaria de solicitar um orçamento:
+    const message = `Olá Brinca Móvel Oficial! Gostaria de solicitar um orçamento:
 *Nome:* ${formData.name || 'Não informado'}
 *Data do Evento:* ${formData.date || 'Não informada'}
 *Horário:* ${formData.time || 'Não informado'}

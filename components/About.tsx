@@ -99,7 +99,7 @@ const About: React.FC = () => {
                 <div className="rounded-[2rem] shadow-lg border-4 border-white rotate-6 h-48 sm:h-64 overflow-hidden bg-yellow-200 relative transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-20 hover:shadow-2xl cursor-pointer">
                   <img 
                     src="https://i.postimg.cc/Vk2RVNXb/Whats-App-Image-2025-12-26-at-07-07-36.jpg" 
-                    alt="Carretinha Brinca Móvel" 
+                    alt="Carretinha Brinca Móvel Oficial" 
                     className="w-full h-full object-cover lazy-image"
                     loading="lazy"
                     width="400"
