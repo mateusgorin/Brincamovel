@@ -69,7 +69,6 @@ const Gallery: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
   
-  // Refs para controle de Swipe (Gesto de deslizar)
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
@@ -89,7 +88,6 @@ const Gallery: React.FC = () => {
     }
   }, [selectedIndex]);
 
-  // Handlers para os gestos de toque
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
   };
@@ -100,19 +98,10 @@ const Gallery: React.FC = () => {
 
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
-    
     const diff = touchStartX.current - touchEndX.current;
     const minSwipeDistance = 50;
-
-    if (diff > minSwipeDistance) {
-      // Deslizou para a esquerda (próxima)
-      handleNext();
-    } else if (diff < -minSwipeDistance) {
-      // Deslizou para a direita (anterior)
-      handlePrev();
-    }
-
-    // Resetar valores
+    if (diff > minSwipeDistance) handleNext();
+    else if (diff < -minSwipeDistance) handlePrev();
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
@@ -153,8 +142,6 @@ const Gallery: React.FC = () => {
                 alt={`Galeria ${index}`}
                 className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
                 loading={index < 2 ? "eager" : "lazy"}
-                // @ts-ignore
-                fetchpriority={index < 2 ? "high" : "auto"}
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
                 decoding="async"
               />
@@ -176,14 +163,14 @@ const Gallery: React.FC = () => {
 
       {currentImage && (
         <div 
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gray-900/90 backdrop-blur-xl animate-fadeIn p-0 transition-all duration-300"
+          className="fixed inset-0 z-[100] flex flex-col bg-gray-900/95 backdrop-blur-xl animate-fadeIn transition-all duration-300 overflow-hidden"
           onClick={() => setSelectedIndex(null)}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Header do Modal */}
-          <div className="absolute top-0 inset-x-0 p-4 sm:p-8 flex justify-between items-center z-[110] pointer-events-none">
+          {/* Header do Modal: Absoluto no Desktop, Relativo no Mobile */}
+          <div className="w-full p-6 sm:p-8 flex justify-between items-center z-[110] pointer-events-none sm:absolute sm:top-0 sm:left-0 mt-2 sm:mt-0">
             <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/20 shadow-lg">
               {selectedIndex! + 1} / {images.length}
             </div>
@@ -195,28 +182,28 @@ const Gallery: React.FC = () => {
             </button>
           </div>
 
-          {/* Área Principal da Imagem */}
+          {/* Área Principal da Imagem: Ocupa todo o espaço e centraliza */}
           <div 
-            className="relative w-full flex-1 flex items-center justify-center p-4 sm:p-8 overflow-hidden"
+            className="relative w-full flex-1 flex flex-col items-center justify-center px-4 sm:px-8 py-0"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Navegação Desktop (Setinhas) */}
+            {/* Navegação Desktop lateral */}
             <button 
-              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
               onClick={handlePrev}
             >
               <ChevronLeft size={32} />
             </button>
 
             <button 
-              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-20 hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
               onClick={handleNext}
             >
               <ChevronRight size={32} />
             </button>
 
-            {/* Imagem Central */}
-            <div className="relative max-w-full max-h-full flex items-center justify-center">
+            {/* Imagem Centralizada */}
+            <div className="relative w-full h-full flex items-center justify-center py-4 sm:py-0">
               {!modalImageLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-10 h-10 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
@@ -226,44 +213,44 @@ const Gallery: React.FC = () => {
                 key={currentImage.url}
                 src={currentImage.url} 
                 alt="Visualização" 
-                className={`max-w-full max-h-[70vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+                className={`max-w-full max-h-[60vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}
                 onLoad={() => setModalImageLoaded(true)}
                 decoding="async"
               />
             </div>
 
-            {/* Controles Touch Invisíveis para clique (além do swipe) */}
-            <div className="absolute inset-0 flex lg:hidden">
-              <div className="w-1/4 h-full" onClick={handlePrev}></div>
-              <div className="w-2/4 h-full" onClick={() => setSelectedIndex(null)}></div>
-              <div className="w-1/4 h-full" onClick={handleNext}></div>
+            {/* Zonas de clique invisíveis para Mobile */}
+            <div className="absolute inset-0 flex lg:hidden pointer-events-none">
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev}></div>
+              <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)}></div>
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext}></div>
             </div>
           </div>
           
-          {/* Legenda na Base */}
+          {/* Legenda: Relativa no Mobile, Absoluta no Desktop */}
           <div 
-            className="w-full bg-gradient-to-t from-gray-900/80 to-transparent pt-20 pb-10 px-6 sm:px-12 text-center pointer-events-none"
+            className="w-full bg-gradient-to-t from-gray-900 to-transparent pt-12 pb-8 px-6 sm:px-12 text-center sm:absolute sm:bottom-0 sm:left-0 z-[110] pointer-events-none"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="max-w-3xl mx-auto pointer-events-auto">
-              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-xl">
+              <h3 className="text-lg sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-xl">
                 {currentImage.title}
               </h3>
-              <p className="text-sm sm:text-lg text-gray-200 leading-relaxed font-medium drop-shadow-md">
+              <p className="text-xs sm:text-lg text-gray-300 leading-relaxed font-medium drop-shadow-md px-2">
                 {currentImage.description}
               </p>
               
-              {/* Navegação Mobile (Setinhas Inferiores) */}
-              <div className="flex items-center justify-center gap-10 mt-8 sm:hidden">
+              {/* Controles Mobile Inferiores */}
+              <div className="flex items-center justify-center gap-12 mt-6 sm:hidden">
                 <button 
                   onClick={handlePrev}
-                  className="bg-white/10 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
+                  className="bg-white/5 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button 
                   onClick={handleNext}
-                  className="bg-white/10 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
+                  className="bg-white/5 text-white p-4 rounded-full active:bg-white/20 border border-white/10 shadow-lg"
                 >
                   <ChevronRight size={24} />
                 </button>
