@@ -187,7 +187,7 @@ const Gallery: React.FC = () => {
 
       {currentImage && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 animate-fadeIn transition-all duration-300 overflow-hidden"
+          className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center animate-fadeIn overflow-hidden"
           onClick={() => setSelectedIndex(null)}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -195,82 +195,61 @@ const Gallery: React.FC = () => {
           role="dialog"
           aria-modal="true"
         >
-          {/* Camada 1: Imagem Centralizada Absoluta */}
-          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-12 pointer-events-none">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {!modalImageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-12 h-12 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
-                </div>
-              )}
-              <img 
-                key={currentImage.url}
-                src={currentImage.url} 
-                alt={currentImage.alt || "Visualização ampliada"} 
-                className={`max-w-full max-h-[70vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-lg sm:rounded-2xl shadow-2xl pointer-events-auto ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-                onLoad={() => setModalImageLoaded(true)}
-                onClick={(e) => e.stopPropagation()}
-                decoding="async"
-              />
-            </div>
-          </div>
-
-          {/* Camada 2: Controles de Navegação (Desktop) */}
-          <div className="absolute inset-0 hidden lg:flex items-center justify-between px-10 pointer-events-none">
-            {!isFirst && (
-              <button 
-                className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto border border-white/5 shadow-2xl group"
-                onClick={handlePrev}
-                aria-label="Imagem anterior"
-              >
-                <ChevronLeft size={36} className="group-hover:-translate-x-1 transition-transform" />
-              </button>
-            )}
-            <div className="flex-1"></div>
-            {!isLast && (
-              <button 
-                className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto border border-white/5 shadow-2xl group"
-                onClick={handleNext}
-                aria-label="Próxima imagem"
-              >
-                <ChevronRight size={36} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            )}
-          </div>
-
-          {/* Camada 3: Header */}
-          <div className="absolute top-0 left-0 w-full p-6 sm:p-10 flex justify-between items-center z-[130] pointer-events-none">
-            <div className="bg-black/60 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/10">
+          {/* Header Fixo no Topo */}
+          <div className="absolute top-0 left-0 w-full p-4 sm:p-10 flex justify-between items-center z-[130] pointer-events-none">
+            <div className="bg-white/10 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/10">
               {selectedIndex! + 1} / {images.length}
             </div>
             <button 
-              className="bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 border border-white/10 shadow-xl"
+              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto border border-white/10"
               onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
               aria-label="Fechar galeria"
             >
               <X size={24} />
             </button>
           </div>
-          
-          {/* Camada 4: Legenda Inferior */}
-          <div 
-            className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent pt-24 pb-10 px-6 sm:px-12 text-center z-[130] pointer-events-none"
-          >
-            <div className="max-w-3xl mx-auto pointer-events-auto">
-              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-2xl">
-                {currentImage.title}
-              </h3>
-              <p className="text-sm sm:text-lg text-gray-300 leading-relaxed font-medium drop-shadow-xl px-2">
-                {currentImage.description}
-              </p>
+
+          {/* Área Central: Imagem real no centro do Flexbox */}
+          <div className="relative w-full h-full flex items-center justify-center p-4">
+            {!modalImageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
+              </div>
+            )}
+            
+            {/* Controles Desktop */}
+            <div className="absolute inset-x-0 hidden lg:flex justify-between px-10 pointer-events-none z-[140]">
+              {!isFirst && (
+                <button className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto" onClick={handlePrev}><ChevronLeft size={32} /></button>
+              )}
+              {!isLast && (
+                <button className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto" onClick={handleNext}><ChevronRight size={32} /></button>
+              )}
+            </div>
+
+            <img 
+              key={currentImage.url}
+              src={currentImage.url} 
+              alt={currentImage.alt} 
+              className={`max-w-full max-h-[65vh] sm:max-h-[80vh] object-contain transition-all duration-300 rounded-lg sm:rounded-2xl shadow-2xl ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+              onLoad={() => setModalImageLoaded(true)}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+
+          {/* Legenda Fixa na Base */}
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/90 to-transparent pt-32 pb-8 px-6 text-center z-[120] pointer-events-none">
+            <div className="max-w-2xl mx-auto pointer-events-auto">
+              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2">{currentImage.title}</h3>
+              <p className="text-sm sm:text-lg text-gray-300 line-clamp-3 sm:line-clamp-none">{currentImage.description}</p>
             </div>
           </div>
 
-          {/* Zonas de Toque Mobile (Invisíveis) */}
-          <div className="absolute inset-0 flex lg:hidden pointer-events-none z-[120]">
-            <div className="w-1/3 h-full pointer-events-auto cursor-pointer" onClick={handlePrev}></div>
-            <div className="w-1/3 h-full pointer-events-auto cursor-pointer" onClick={() => setSelectedIndex(null)}></div>
-            <div className="w-1/3 h-full pointer-events-auto cursor-pointer" onClick={handleNext}></div>
+          {/* Zonas de Toque Mobile */}
+          <div className="absolute inset-0 flex lg:hidden pointer-events-none z-[110]">
+            <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev}></div>
+            <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)}></div>
+            <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext}></div>
           </div>
         </div>
       )}
