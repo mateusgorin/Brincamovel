@@ -4,42 +4,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brinca Móvel Oficial - Playground Móvel Raro em Brasília</title>
+    <meta name="theme-color" content="#ec4899" />
+    
+    <!-- SEO Básico -->
+    <title>Brinca Móvel Oficial | Playground Móvel e Piscina de Bolinhas em Brasília DF</title>
+    <meta name="description" content="O melhor playground móvel de Brasília! Aluguel de piscina de bolinhas, pula-pula e pintura facial para festas e eventos em todo o DF. Diversão segura e única." />
+    <meta name="keywords" content="playground móvel brasília, piscina de bolinhas brasília, brinquedos para festas df, pintura facial brasília, aluguel de brinquedos brasília, recreação infantil df" />
+    <meta name="author" content="Brinca Móvel Oficial" />
+    <link rel="canonical" href="https://brincamovel.com.br" />
+
+    <!-- Ícones e Mobile -->
     <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1">
-    
-    <!-- Otimização de Performance: Preload da Imagem Principal (LCP) com alta prioridade -->
-    <link rel="preload" as="image" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" fetchpriority="high">
-    
-    <!-- Otimização de Performance: Preconnect para acelerar handshakes de rede -->
-    <link rel="preconnect" href="https://www.dropbox.com">
+    <link rel="apple-touch-icon" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://brincamovel.com.br" />
+    <meta property="og:title" content="Brinca Móvel Oficial | Playground Móvel em Brasília" />
+    <meta property="og:description" content="Transforme sua festa com o playground móvel mais raro de Brasília. Piscina de bolinhas e pintura facial." />
+    <meta property="og:image" content="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" />
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://dl.dropboxusercontent.com">
     <link rel="preconnect" href="https://i.postimg.cc">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://dl.dropboxusercontent.com">
+    <link rel="dns-prefetch" href="https://i.postimg.cc">
 
+    <!-- Otimização de Performance: Preload do LCP -->
+    <link rel="preload" as="image" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" fetchpriority="high">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap&font-display=swap" rel="stylesheet">
+    
     <style>
+      :root {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: 'Nunito', sans-serif;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
       h1, h2, h3, h4, .font-kids {
         font-family: 'Fredoka', sans-serif;
       }
+      
+      /* Otimização de Core Web Vitals (CLS & LCP) */
+      section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 500px;
+      }
+      #inicio, #navbar {
+        content-visibility: visible;
+        contain-intrinsic-size: auto;
+      }
+
       .blob-shape {
         border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
       }
-      
-      /* Efeito de carregamento suave para imagens */
       .lazy-image {
         opacity: 0;
-        transition: opacity 0.8s ease-in-out, transform 0.8s ease-out;
+        transition: opacity 0.4s ease-in-out;
       }
-      
       .lazy-image.loaded {
         opacity: 1;
       }
-
-      /* Shimmer Effect para placeholders de imagens pesadas */
       .shimmer-bg {
         background: linear-gradient(
           90deg,
@@ -50,12 +82,10 @@
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite linear;
       }
-
       @keyframes shimmer {
         from { background-position: 200% 0; }
         to { background-position: -200% 0; }
       }
-
       @keyframes wiggle {
         0%, 100% { transform: rotate(-6deg); }
         50% { transform: rotate(6deg); }
@@ -63,7 +93,6 @@
       .animate-wiggle {
         animation: wiggle 2s ease-in-out infinite;
       }
-
       @keyframes bounce-gentle {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-6px); }
@@ -71,7 +100,6 @@
       .animate-bounce-gentle {
         animation: bounce-gentle 2s infinite;
       }
-
       @keyframes spin-slow {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
@@ -79,7 +107,6 @@
       .animate-spin-slow {
         animation: spin-slow 8s linear infinite;
       }
-
       @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -87,18 +114,30 @@
       .animate-fadeIn {
         animation: fadeIn 0.3s ease-out forwards;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+          animation-delay: -1ms !important;
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          background-attachment: scroll !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>

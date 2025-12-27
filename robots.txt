@@ -1,0 +1,4 @@
+
+User-agent: *
+Allow: /
+Sitemap: https://brincamovel.com.br/sitemap.xml

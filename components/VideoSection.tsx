@@ -22,7 +22,7 @@ const videos = [
 
 const VideoSection: React.FC = () => {
   return (
-    <section className="py-24 bg-pink-50 relative overflow-hidden">
+    <section className="py-24 bg-pink-50 relative overflow-hidden" style={{ contentVisibility: 'auto' }}>
       {/* Elementos decorativos de fundo */}
       <div className="absolute top-10 right-10 text-orange-200 opacity-40 animate-pulse hidden md:block">
         <Sparkles size={120} className="animate-spin-slow" />
@@ -41,12 +41,15 @@ const VideoSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 justify-center items-start">
           {videos.map((video, index) => (
             <div key={index} className="flex flex-col items-center group">
-              <div className="relative w-full max-w-[280px] md:max-w-full aspect-[9/16] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-black transition-all duration-500 hover:scale-[1.03] hover:shadow-pink-200/50">
+              <div 
+                className="relative w-full max-w-[280px] md:max-w-full aspect-[9/16] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-black transition-all duration-500 hover:scale-[1.03] hover:shadow-pink-200/50"
+                style={{ aspectRatio: '9/16' }}
+              >
                 <video 
                   className="w-full h-full object-cover"
                   controls
                   playsInline
-                  preload="metadata"
+                  preload="none" /* Mudado para none para máxima performance inicial */
                 >
                   <source src={video.url} type="video/mp4" />
                   Seu navegador não suporta vídeos.

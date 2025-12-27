@@ -106,7 +106,7 @@ const Services: React.FC = () => {
                <div className="absolute inset-0 bg-blue-300 rounded-[2rem] rotate-6 animate-pulse"></div>
                <img 
                  src="https://www.dropbox.com/scl/fi/n3rw94nb7fnqsw2qmwj1d/WhatsApp-Image-2025-12-26-at-14.58.19.jpeg?rlkey=v6cnutdwc6hymmjud1ntcl9n9&st=24c6lyix&raw=1" 
-                 alt="Exemplo de Pintura Facial" 
+                 alt="Pintura facial artística infantil Brasília DF - Brinca Móvel" 
                  className="w-full h-full object-cover rounded-[2rem] border-4 border-white shadow-lg relative z-10 -rotate-3 transition-transform group-hover:rotate-0 duration-500"
                  loading="lazy"
                  decoding="async"

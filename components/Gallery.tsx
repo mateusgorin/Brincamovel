@@ -6,61 +6,73 @@ const images = [
   { 
     url: 'https://www.dropbox.com/scl/fi/nswik9dn03pvx0te4nkjl/WhatsApp-Image-2025-12-26-at-14.58.20.jpeg?rlkey=0ri7iqro8daghyk3x9xl3mcxb&st=wrs2eqnp&raw=1', 
     title: <>Pintura Artística 🎭</>,
+    alt: "Criança com pintura artística facial feita em evento em Brasília",
     description: "Transformamos o sonho em cores com pinturas detalhadas e artísticas para todas as idades."
   },
   { 
     url: 'https://www.dropbox.com/scl/fi/9tf0n7yn7q0y32n45ht10/WhatsApp-Image-2025-12-26-at-14.56.22.jpeg?rlkey=e4tq6jkkqiinns6m6gvfyqq4o&st=t8n6e5r2&raw=1', 
     title: <>Carretinha ✨</>,
+    alt: "Serviço de pintura facial e carretinha playground Brasília",
     description: "Nossa equipe de pintura facial integrada à diversão da carretinha, usando materiais de primeira linha."
   },
   { 
     url: 'https://www.dropbox.com/scl/fi/n3rw94nb7fnqsw2qmwj1d/WhatsApp-Image-2025-12-26-at-14.58.19.jpeg?rlkey=v6cnutdwc6hymmjud1ntcl9n9&st=24c6lyix&raw=1', 
     title: <>Arte e Cores 🎨</>,
+    alt: "Arte em pintura facial infantil Distrito Federal",
     description: "Brilhos, pedrarias e muita criatividade para encantar os pequenos convidados."
   },
   { 
     url: 'https://i.postimg.cc/pXv3MLz5/Screenshot-20251225-204830-Whats-App.jpg', 
     title: <>Carretinha Oficial <span className="inline-block animate-wiggle">🚐</span></>,
+    alt: "Carretinha playground móvel estacionada em Brasília",
     description: "O playground móvel mais completo de Brasília pronto para estacionar no seu evento."
   },
   { 
     url: 'https://i.postimg.cc/kXyzJPvg/Screenshot-20251225-204745-Whats-App.jpg', 
     title: <>Vista Lateral <span className="inline-block animate-wiggle">✨</span></>,
+    alt: "Estrutura do playground móvel para festas infantis DF",
     description: "Estrutura compacta que ocupa apenas uma vaga de carro, facilitando a logística em qualquer local."
   },
   { 
     url: 'https://i.postimg.cc/bNP4fwkn/Screenshot-20251225-204725-Whats-App.jpg', 
     title: <>Mar de Bolinhas <span className="inline-block animate-bounce-gentle">🎈</span></>,
+    alt: "Piscina de bolinhas aluguel Brasília - interior do playground",
     description: "Milhares de bolinhas coloridas e higienizadas para mergulhos de pura alegria."
   },
   { 
     url: 'https://i.postimg.cc/CL09pxkf/Screenshot-20251225-204814-Whats-App.jpg', 
     title: <>Espaço Interno <span className="inline-block animate-bounce-gentle">🏠</span></>,
+    alt: "Área interna segura do playground móvel Brinca Móvel",
     description: "Ambiente seguro, com proteção em todas as quinas e visibilidade total para os pais."
   },
   { 
     url: 'https://i.postimg.cc/15Sb13wX/Screenshot-20251225-204842-Whats-App.jpg', 
     title: <>Detalhes Seguros <span className="inline-block animate-pulse">🛡️</span></>,
+    alt: "Rede de proteção e segurança em playground infantil Brasília",
     description: "Redes de proteção reforçadas e materiais atóxicos garantem a segurança de todos."
   },
   { 
     url: 'https://i.postimg.cc/RVm2xZK0/Screenshot-20251225-204852-Whats-App.jpg', 
     title: <>Muita Alegria! <span className="inline-block animate-bounce-gentle">😄</span></>,
+    alt: "Criança se divertindo na carretinha de brinquedos Brasília",
     description: "O sorriso no rosto das crianças é o que nos move todos os finais de semana."
   },
   { 
     url: 'https://i.postimg.cc/7Y4jrZ0b/Screenshot-20251225-204859-Whats-App.jpg', 
     title: <>Pura Diversão <span className="inline-block animate-spin-slow">🎠</span></>,
+    alt: "Variedade de brinquedos móveis para aluguel em Brasília",
     description: "Várias atrações em um único lugar: pula-pula, escorregador, piscina de bolinhas e muito mais."
   },
   { 
     url: 'https://i.postimg.cc/FsvwXH3R/Screenshot-20251225-204907-Whats-App.jpg', 
     title: <>Festa Inesquecível <span className="inline-block animate-wiggle">🎊</span></>,
+    alt: "Decoração e diversão com playground móvel no DF",
     description: "Fazemos do seu aniversário um momento mágico que ficará guardado na memória."
   },
   { 
     url: 'https://i.postimg.cc/CL09pxDW/Screenshot-20251225-204915-Whats-App.jpg', 
     title: <>Brasília em Festa <span className="inline-block animate-bounce-gentle">🏙️</span></>,
+    alt: "Brinca Móvel Oficial atendendo festas em todo o Distrito Federal",
     description: "Atendemos todo o DF e entorno com pontualidade e excelência no serviço."
   },
 ];
@@ -123,7 +135,7 @@ const Gallery: React.FC = () => {
   const currentImage = selectedIndex !== null ? images[selectedIndex] : null;
 
   return (
-    <section id="galeria" className="py-24 bg-white relative">
+    <section id="galeria" className="py-24 bg-white relative" style={{ contentVisibility: 'auto' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 uppercase tracking-tight">
           Nossa Galeria <span className="inline-block animate-bounce-gentle">📸</span>
@@ -139,11 +151,12 @@ const Gallery: React.FC = () => {
                 setSelectedIndex(index);
               }}
               className="group relative aspect-square sm:aspect-video overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-2 md:border-4 border-white"
+              style={{ aspectRatio: '1/1' }}
             >
               <img 
                 src={img.url}
-                alt={`Galeria ${index}`}
-                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
+                alt={img.alt || "Foto Galeria Brinca Móvel"}
+                className="w-full h-full object-cover transition-opacity duration-300 group-hover:scale-110 opacity-0"
                 loading="lazy"
                 decoding="async"
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
@@ -171,6 +184,8 @@ const Gallery: React.FC = () => {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          role="dialog"
+          aria-modal="true"
         >
           {/* Header do Modal */}
           <div className="w-full p-6 sm:p-8 flex justify-between items-center z-[110] pointer-events-none sm:absolute sm:top-0 sm:left-0 mt-2 sm:mt-0">
@@ -180,6 +195,7 @@ const Gallery: React.FC = () => {
             <button 
               className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 active:scale-95 border border-white/20 shadow-lg"
               onClick={() => setSelectedIndex(null)}
+              aria-label="Fechar galeria"
             >
               <X size={24} />
             </button>
@@ -190,11 +206,12 @@ const Gallery: React.FC = () => {
             className="relative w-full flex-1 flex flex-col items-center justify-center px-4 sm:px-8 py-0"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Navegação Desktop lateral - Escondida se for a primeira/última */}
+            {/* Navegação Desktop lateral */}
             {!isFirst && (
               <button 
                 className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
                 onClick={handlePrev}
+                aria-label="Imagem anterior"
               >
                 <ChevronLeft size={32} />
               </button>
@@ -204,6 +221,7 @@ const Gallery: React.FC = () => {
               <button 
                 className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
                 onClick={handleNext}
+                aria-label="Próxima imagem"
               >
                 <ChevronRight size={32} />
               </button>
@@ -219,8 +237,8 @@ const Gallery: React.FC = () => {
               <img 
                 key={currentImage.url}
                 src={currentImage.url} 
-                alt="Visualização" 
-                className={`max-w-full max-h-[60vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}
+                alt={currentImage.alt || "Visualização ampliada"} 
+                className={`max-w-full max-h-[60vh] sm:max-h-[85vh] object-contain transition-all duration-300 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
                 onLoad={() => setModalImageLoaded(true)}
                 decoding="async"
               />
@@ -228,9 +246,9 @@ const Gallery: React.FC = () => {
 
             {/* Zonas de clique invisíveis para Mobile */}
             <div className="absolute inset-0 flex lg:hidden pointer-events-none">
-              <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev}></div>
-              <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)}></div>
-              <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext}></div>
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev} role="button" aria-label="Anterior"></div>
+              <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)} role="button" aria-label="Fechar"></div>
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext} role="button" aria-label="Próximo"></div>
             </div>
           </div>
           
@@ -246,8 +264,6 @@ const Gallery: React.FC = () => {
               <p className="text-xs sm:text-lg text-gray-300 leading-relaxed font-medium drop-shadow-md px-2">
                 {currentImage.description}
               </p>
-              
-              {/* No Mobile os botões foram removidos conforme solicitado */}
               <div className="h-6 sm:hidden"></div>
             </div>
           </div>
