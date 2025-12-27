@@ -4,7 +4,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ec4899" />
     
     <!-- SEO Básico -->
     <title>Brinca Móvel Oficial | Playground Móvel e Piscina de Bolinhas em Brasília DF</title>
@@ -13,10 +12,6 @@
     <meta name="author" content="Brinca Móvel Oficial" />
     <link rel="canonical" href="https://brincamovel.com.br" />
 
-    <!-- Ícones e Mobile -->
-    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1">
-    <link rel="apple-touch-icon" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1">
-
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://brincamovel.com.br" />
@@ -24,50 +19,72 @@
     <meta property="og:description" content="Transforme sua festa com o playground móvel mais raro de Brasília. Piscina de bolinhas e pintura facial." />
     <meta property="og:image" content="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" />
 
-    <!-- Performance Hints -->
-    <link rel="preconnect" href="https://dl.dropboxusercontent.com">
+    <!-- Schema.org LocalBusiness (SEO Local) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EntertainmentBusiness",
+      "name": "Brinca Móvel Oficial",
+      "alternateName": "Brinca Móvel Brasília",
+      "description": "Playground móvel e recreação infantil em Brasília e DF.",
+      "url": "https://brincamovel.com.br",
+      "logo": "https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Brasília",
+        "addressRegion": "DF",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-15.7942",
+        "longitude": "-47.8822"
+      },
+      "hasMap": "https://www.google.com/maps?q=Brasilia+DF",
+      "areaServed": "Distrito Federal",
+      "telephone": "+5561984038961",
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1">
+    
+    <link rel="preload" as="image" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" fetchpriority="high">
+    
+    <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="preconnect" href="https://i.postimg.cc">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://dl.dropboxusercontent.com">
-    <link rel="dns-prefetch" href="https://i.postimg.cc">
 
-    <!-- Otimização de Performance: Preload do LCP -->
-    <link rel="preload" as="image" href="https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1" fetchpriority="high">
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap&font-display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <style>
-      :root {
-        scroll-behavior: smooth;
-      }
       body {
         font-family: 'Nunito', sans-serif;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
       }
       h1, h2, h3, h4, .font-kids {
         font-family: 'Fredoka', sans-serif;
       }
-      
-      /* Otimização de Core Web Vitals (CLS & LCP) */
-      section {
-        content-visibility: auto;
-        contain-intrinsic-size: 1px 500px;
-      }
-      #inicio, #navbar {
-        content-visibility: visible;
-        contain-intrinsic-size: auto;
-      }
-
       .blob-shape {
         border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
       }
       .lazy-image {
         opacity: 0;
-        transition: opacity 0.4s ease-in-out;
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-out;
       }
       .lazy-image.loaded {
         opacity: 1;
@@ -113,18 +130,6 @@
       }
       .animate-fadeIn {
         animation: fadeIn 0.3s ease-out forwards;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *, ::before, ::after {
-          animation-delay: -1ms !important;
-          animation-duration: 1ms !important;
-          animation-iteration-count: 1 !important;
-          background-attachment: scroll !important;
-          scroll-behavior: auto !important;
-          transition-duration: 0s !important;
-          transition-delay: 0s !important;
-        }
       }
     </style>
     <script type="importmap">

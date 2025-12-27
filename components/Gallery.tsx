@@ -132,19 +132,10 @@ const Gallery: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  useEffect(() => {
-    if (selectedIndex !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [selectedIndex]);
-
   const currentImage = selectedIndex !== null ? images[selectedIndex] : null;
 
   return (
-    <section id="galeria" className="py-24 bg-white relative" style={{ contentVisibility: 'auto' }}>
+    <section id="galeria" className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 uppercase tracking-tight">
           Nossa Galeria <span className="inline-block animate-bounce-gentle">📸</span>
@@ -159,12 +150,12 @@ const Gallery: React.FC = () => {
                 setModalImageLoaded(false);
                 setSelectedIndex(index);
               }}
-              className="group relative aspect-square overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-2 md:border-4 border-white"
+              className="group relative aspect-square sm:aspect-video overflow-hidden rounded-3xl sm:rounded-[2.5rem] cursor-pointer shadow-md transition-all hover:shadow-2xl bg-pink-50 shimmer-bg border-2 md:border-4 border-white"
             >
               <img 
                 src={img.url}
                 alt={img.alt || "Foto Galeria Brinca Móvel"}
-                className="w-full h-full object-cover transition-opacity duration-300 group-hover:scale-110 opacity-0"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0"
                 loading="lazy"
                 decoding="async"
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
@@ -187,69 +178,90 @@ const Gallery: React.FC = () => {
 
       {currentImage && (
         <div 
-          className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center animate-fadeIn overflow-hidden"
+          className="fixed inset-0 z-[100] flex flex-col bg-gray-900/95 backdrop-blur-xl animate-fadeIn transition-all duration-300 overflow-hidden"
           onClick={() => setSelectedIndex(null)}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          role="dialog"
-          aria-modal="true"
         >
-          {/* Header Fixo no Topo */}
-          <div className="absolute top-0 left-0 w-full p-4 sm:p-10 flex justify-between items-center z-[130] pointer-events-none">
-            <div className="bg-white/10 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/10">
+          {/* Header do Modal */}
+          <div className="w-full p-6 sm:p-8 flex justify-between items-center z-[110] pointer-events-none sm:absolute sm:top-0 sm:left-0 mt-2 sm:mt-0">
+            <div className="bg-white/10 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm pointer-events-auto border border-white/20 shadow-lg">
               {selectedIndex! + 1} / {images.length}
             </div>
             <button 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto border border-white/10"
-              onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
-              aria-label="Fechar galeria"
+              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all pointer-events-auto hover:scale-110 active:scale-95 border border-white/20 shadow-lg"
+              onClick={() => setSelectedIndex(null)}
             >
               <X size={24} />
             </button>
           </div>
 
-          {/* Área Central: Imagem real no centro do Flexbox */}
-          <div className="relative w-full h-full flex items-center justify-center p-4">
-            {!modalImageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
-              </div>
+          {/* Área Principal da Imagem */}
+          <div 
+            className="relative w-full flex-1 flex flex-col items-center justify-center px-4 sm:px-8 py-0"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Navegação Desktop lateral - Escondida se for a primeira/última */}
+            {!isFirst && (
+              <button 
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+                onClick={handlePrev}
+              >
+                <ChevronLeft size={32} />
+              </button>
             )}
-            
-            {/* Controles Desktop */}
-            <div className="absolute inset-x-0 hidden lg:flex justify-between px-10 pointer-events-none z-[140]">
-              {!isFirst && (
-                <button className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto" onClick={handlePrev}><ChevronLeft size={32} /></button>
+
+            {!isLast && (
+              <button 
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all z-[120] hidden lg:flex items-center justify-center border border-white/10 shadow-xl"
+                onClick={handleNext}
+              >
+                <ChevronRight size={32} />
+              </button>
+            )}
+
+            {/* Imagem Centralizada */}
+            <div className="relative w-full h-full flex items-center justify-center py-4 sm:py-0">
+              {!modalImageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-10 h-10 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin"></div>
+                </div>
               )}
-              {!isLast && (
-                <button className="bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all pointer-events-auto" onClick={handleNext}><ChevronRight size={32} /></button>
-              )}
+              <img 
+                key={currentImage.url}
+                src={currentImage.url} 
+                alt={currentImage.alt || "Visualização ampliada"} 
+                className={`max-w-full max-h-[60vh] sm:max-h-[85vh] object-contain transition-all duration-500 rounded-2xl shadow-2xl select-none ${modalImageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}
+                onLoad={() => setModalImageLoaded(true)}
+                decoding="async"
+              />
             </div>
 
-            <img 
-              key={currentImage.url}
-              src={currentImage.url} 
-              alt={currentImage.alt} 
-              className={`max-w-full max-h-[65vh] sm:max-h-[80vh] object-contain transition-all duration-300 rounded-lg sm:rounded-2xl shadow-2xl ${modalImageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-              onLoad={() => setModalImageLoaded(true)}
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-
-          {/* Legenda Fixa na Base */}
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/90 to-transparent pt-32 pb-8 px-6 text-center z-[120] pointer-events-none">
-            <div className="max-w-2xl mx-auto pointer-events-auto">
-              <h3 className="text-xl sm:text-3xl font-kids font-bold text-white mb-2">{currentImage.title}</h3>
-              <p className="text-sm sm:text-lg text-gray-300 line-clamp-3 sm:line-clamp-none">{currentImage.description}</p>
+            {/* Zonas de clique invisíveis para Mobile */}
+            <div className="absolute inset-0 flex lg:hidden pointer-events-none">
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev}></div>
+              <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)}></div>
+              <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext}></div>
             </div>
           </div>
-
-          {/* Zonas de Toque Mobile */}
-          <div className="absolute inset-0 flex lg:hidden pointer-events-none z-[110]">
-            <div className="w-1/4 h-full pointer-events-auto" onClick={handlePrev}></div>
-            <div className="w-2/4 h-full pointer-events-auto" onClick={() => setSelectedIndex(null)}></div>
-            <div className="w-1/4 h-full pointer-events-auto" onClick={handleNext}></div>
+          
+          {/* Legenda */}
+          <div 
+            className="w-full bg-gradient-to-t from-gray-900 to-transparent pt-12 pb-8 px-6 sm:px-12 text-center sm:absolute sm:bottom-0 sm:left-0 z-[110] pointer-events-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="max-w-3xl mx-auto pointer-events-auto">
+              <h3 className="text-lg sm:text-3xl font-kids font-bold text-white mb-2 tracking-wide drop-shadow-xl">
+                {currentImage.title}
+              </h3>
+              <p className="text-xs sm:text-lg text-gray-300 leading-relaxed font-medium drop-shadow-md px-2">
+                {currentImage.description}
+              </p>
+              
+              {/* No Mobile os botões foram removidos conforme solicitado */}
+              <div className="h-6 sm:hidden"></div>
+            </div>
           </div>
         </div>
       )}
