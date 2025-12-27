@@ -95,13 +95,10 @@ const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Destaque Extra: Pintura Facial & Artística - AZUL ESCURECIDO */}
         <div className="mt-20 bg-gradient-to-br from-blue-100 to-white p-8 md:p-12 rounded-[3.5rem] border-4 border-blue-200 inline-block max-w-4xl transform hover:scale-[1.01] transition-all shadow-xl group relative overflow-hidden">
-          {/* Decoração sutil de fundo */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
           
           <div className="flex flex-col md:flex-row items-center gap-10 text-left relative z-10">
-            {/* Imagem de Destaque da Pintura */}
             <div className="w-48 h-48 md:w-56 md:h-56 shrink-0 relative">
                <div className="absolute inset-0 bg-blue-300 rounded-[2rem] rotate-6 animate-pulse"></div>
                <img 
@@ -110,16 +107,17 @@ const Services: React.FC = () => {
                  className="w-full h-full object-cover rounded-[2rem] border-4 border-white shadow-lg relative z-10 -rotate-3 transition-transform group-hover:rotate-0 duration-500"
                  loading="lazy"
                  decoding="async"
+                 width="224"
+                 height="224"
+                 fetchpriority="low"
                />
             </div>
 
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-white p-3 rounded-2xl shadow-sm">
-                  {/* Ícone de Paleta agora com animação contínua (animate-wiggle) */}
                   <Palette className="text-blue-600 animate-wiggle" size={32} />
                 </div>
-                {/* Removido o emoji para deixar apenas o ícone animado */}
                 <h3 className="text-3xl md:text-4xl font-bold text-blue-700">Pintura Facial & Artística</h3>
               </div>
               <p className="text-xl text-gray-700 leading-relaxed mb-6">
