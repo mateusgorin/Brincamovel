@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Calendar, MessageCircle } from 'lucide-react';
 
@@ -18,6 +17,7 @@ const Navbar: React.FC = () => {
     { name: 'O que é?', href: '#sobre' },
     { name: 'Atrações', href: '#servicos' },
     { name: 'Galeria', href: '#galeria' },
+    { name: 'Clientes', href: '#depoimentos' },
     { name: 'Contato', href: '#contato' },
   ];
 
