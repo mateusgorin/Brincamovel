@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   Palette, 
@@ -101,7 +102,7 @@ const Services: React.FC = () => {
             <div className="w-48 h-48 md:w-56 md:h-56 shrink-0 relative">
                <div className="absolute inset-0 bg-blue-300 rounded-[2rem] rotate-6 animate-pulse"></div>
                <img 
-                 src="https://i.postimg.cc/RVm2xZK0/Screenshot-20251225-204852-Whats-App.jpg" 
+                 src="https://previews.dropbox.com/p/thumb/AC3e-Xtj2FKwxRGz89N8oGWIHSs4q5HBKomtC_bnvGd4E5G47dg1jBbCA2XGakc7s67T0wMfSawd4LvBZGSPZo8lb1-wfFsk0P2NdtCZIC1NpMQq6Psyx-t3doxGpGbMc4Zn8Acu7cfkWc6q3Bfkv1RXTXVF_SCDOSNbGmu3kIXYOkXepvpqpKvum2pu-tldJBT2BVP3O-QQvDFA7QgiUQnWMs8kSZ0pK0fiSLDzmDySngqV8VYRmdte94BBXjMf7vX3GBmoNt5ocq3K8qMgvEtXkAmoGilDaQGZw1z7DYIZ_8PZRoRt1Ivc3afgaO0oS4s/p.jpeg" 
                  alt="Pintura facial artística infantil Brasília DF - Brinca Móvel" 
                  className="w-full h-full object-cover rounded-[2rem] border-4 border-white shadow-lg relative z-10 -rotate-3 transition-transform group-hover:rotate-0 duration-500"
                  loading="lazy"

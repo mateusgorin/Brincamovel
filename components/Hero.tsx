@@ -1,8 +1,18 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Star, Sparkles, MapPin, Palette } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const logoUrl = "https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg";
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const logoUrl = "https://previews.dropbox.com/p/thumb/AC2mJX43GL5zbyacSfprZ9UdDRuq-4boxUVvB3dq6N6-R1zAcIc3-vNLDNuEK3pXGXMfRtSs14Fml3K9WozkKOGzodlIvaE11lM4TPp7caXaD-GFCTA-k2GCeslDi3JKvwXw78UEATyePApvll-9ZCicobqtGAunOTrHYYLSKUBnQOtWi3fG9Zp58x_6CTJMcSK6zeIIUG3Wnme8qdVzrauQRbo6sAbZ3TBRK26ZnRHI01_PJPP_j0rAfjj2wDGcDoxF-kFgY2tmKWgWztIYmCUF8XhuiWF7VfmGQ2eEYIiXcijn68GVCi8wCBCrQt2kHp0/p.png";
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = logoUrl;
+    if (img.complete) {
+      setImageLoaded(true);
+    }
+  }, [logoUrl]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -64,14 +74,15 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex-1 relative w-full flex justify-center">
-            <div className="relative z-10 w-full max-w-[720px] aspect-square transition-all duration-500 hover:scale-[1.02] animate-bounce-gentle" style={{ animationDuration: '3.5s' }}>
+            <div className={`relative z-10 w-full max-w-[720px] aspect-square rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white transition-all duration-500 hover:scale-[1.02] bg-white p-0 ${!imageLoaded ? 'shimmer-bg' : ''} animate-bounce-gentle`} style={{ animationDuration: '3.5s' }}>
               <img 
                 src={logoUrl} 
                 alt="Brinca Móvel Oficial - Playground Móvel e Piscina de Bolinhas para Festas em Brasília DF"
                 fetchpriority="high"
                 loading="eager"
                 decoding="sync"
-                className="w-full h-full object-contain transition-all duration-500 scale-[1.15]"
+                className={`w-full h-full object-contain transition-all duration-500 scale-[1.15] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setImageLoaded(true)}
                 width="800"
                 height="800"
               />
