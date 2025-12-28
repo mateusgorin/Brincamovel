@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
           <div className="flex-shrink-0 flex items-center space-x-3 cursor-pointer" onClick={(e) => handleNavClick(e as any, '#')}>
             <div className="w-10 h-10 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
               <img 
-                src="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg" 
+                src="https://i.postimg.cc/26Lsc5tK/result-goro.png" 
                 alt="Brinca Móvel Oficial Logo" 
                 className="w-full h-full object-cover scale-110"
               />

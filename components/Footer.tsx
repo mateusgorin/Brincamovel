@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, ExternalLink } from 'lucide-react';
 
@@ -27,7 +26,7 @@ const Footer: React.FC = () => {
         <div className="flex items-center justify-center space-x-3 mb-6">
           <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400 shadow-sm bg-pink-50">
             <img 
-              src="https://i.postimg.cc/FKkTJM38/brincamovel-oficial-20251225-0003.jpg" 
+              src="https://i.postimg.cc/26Lsc5tK/result-goro.png" 
               alt="Brinca Móvel Oficial Logo Footer" 
               className="w-full h-full object-cover lazy-image"
               loading="lazy"
