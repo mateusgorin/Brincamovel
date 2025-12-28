@@ -4,7 +4,7 @@ import { Star, Sparkles, MapPin, Palette } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const logoUrl = "https://www.dropbox.com/scl/fi/rv5axqftgjpnf4rm7ijfq/Logotipo-l-Vetor-1.png?rlkey=vh2mrusi2r05vy2hfeuh2tsr7&st=k6byph49&raw=1";
+  const logoUrl = "https://previews.dropbox.com/p/thumb/AC2mJX43GL5zbyacSfprZ9UdDRuq-4boxUVvB3dq6N6-R1zAcIc3-vNLDNuEK3pXGXMfRtSs14Fml3K9WozkKOGzodlIvaE11lM4TPp7caXaD-GFCTA-k2GCeslDi3JKvwXw78UEATyePApvll-9ZCicobqtGAunOTrHYYLSKUBnQOtWi3fG9Zp58x_6CTJMcSK6zeIIUG3Wnme8qdVzrauQRbo6sAbZ3TBRK26ZnRHI01_PJPP_j0rAfjj2wDGcDoxF-kFgY2tmKWgWztIYmCUF8XhuiWF7VfmGQ2eEYIiXcijn68GVCi8wCBCrQt2kHp0/p.png";
 
   useEffect(() => {
     const img = new Image();
@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
     if (img.complete) {
       setImageLoaded(true);
     }
-  }, []);
+  }, [logoUrl]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
