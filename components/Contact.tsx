@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MessageCircle, Phone, Instagram } from 'lucide-react';
 
@@ -42,99 +41,116 @@ Aguardo o retorno! ✨`;
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">Vamos levar a festa para você? <span className="inline-block animate-bounce-gentle">🎈</span></h2>
-            <p className="text-xl mb-12 text-pink-50">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+          <div className="lg:w-1/2 text-center">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white flex items-center justify-center lg:justify-start gap-3">
+              Vamos levar a festa para você? 
+              <span className="inline-block animate-bounce-gentle">
+                <svg width="40" height="56" viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-12 md:w-12 md:h-16">
+                  {/* Corpo do Balão Amarelo */}
+                  <path d="M20 36C31.0457 36 40 27.9411 40 18C40 8.05888 31.0457 0 20 0C8.9543 0 0 8.05888 0 18C0 27.9411 8.9543 36 20 36Z" fill="#FACC15"/>
+                  {/* Brilho */}
+                  <path d="M12 8C9.6 9.6 8 12 8 16" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.5"/>
+                  {/* Nó */}
+                  <path d="M20 36L17.6 40H22.4L20 36Z" fill="#EAB308"/>
+                  {/* Fita Azul */}
+                  <path d="M20 40C20 40 28 44 20 48C12 52 20 56 20 56" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                </svg>
+              </span>
+            </h2>
+            <p className="text-xl mb-10 text-pink-50 max-w-xl mx-auto leading-relaxed">
               Entre em contato agora para verificar disponibilidade de data em Brasília e região. Estamos prontos para criar memórias inesquecíveis!
             </p>
-            
-            <div className="space-y-6 text-xl">
+
+            <div className="flex flex-col gap-4 items-center">
+              {/* Botão Instagram - Mais compacto e centralizado */}
+              <a 
+                href="https://www.instagram.com/brincamovel.oficial?igsh=cm5lMzN3amp3c2J4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center"
+              >
+                <div className="bg-pink-100 p-1.5 rounded-full group-hover:bg-pink-200 transition-colors">
+                  <Instagram size={22} className="group-hover:rotate-12 transition-transform" />
+                </div>
+                <span>Siga no Instagram</span>
+              </a>
+
+              {/* Botão Telefone - Mais compacto e centralizado */}
               <a 
                 href="https://wa.me/5561984038961" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-center lg:justify-start space-x-4 hover:text-pink-100 transition-colors group"
+                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center"
               >
-                <div className="bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-all">
-                  <Phone size={24} className="group-hover:animate-wiggle" />
+                <div className="bg-pink-100 p-1.5 rounded-full group-hover:bg-pink-200 transition-colors">
+                  <Phone size={22} className="group-hover:animate-wiggle" />
                 </div>
                 <span>(61) 98403-8961</span>
-              </a>
-              <a 
-                href="https://www.instagram.com/brincamovel.oficial?igsh=cm5lMzN3amp3c2J4" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center justify-center lg:justify-start space-x-4 hover:text-pink-100 transition-colors group"
-              >
-                <div className="bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-all">
-                  <Instagram size={24} className="group-hover:animate-spin-slow" />
-                </div>
-                <span>@brincamovel.oficial</span>
               </a>
             </div>
           </div>
           
-          <div className="lg:w-1/2 w-full max-w-md bg-white text-gray-800 p-8 rounded-[3rem] shadow-2xl">
-            <h3 className="text-3xl font-bold mb-6 text-pink-500 text-center">Peça seu orçamento</h3>
-            <form className="space-y-4" onSubmit={handleWhatsAppSubmit}>
+          <div className="lg:w-1/2 w-full max-w-md bg-white text-gray-800 p-8 rounded-[3.5rem] shadow-2xl mx-auto lg:mx-0">
+            <h3 className="text-3xl font-bold mb-8 text-pink-500 text-center">Peça seu orçamento</h3>
+            <form className="space-y-5" onSubmit={handleWhatsAppSubmit}>
               <div>
-                <label className="block text-sm font-bold mb-1 ml-2 text-gray-600">Seu Nome</label>
+                <label className="block text-sm font-bold mb-2 ml-4 text-gray-500">Seu Nome</label>
                 <input 
                   type="text" 
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Ex: Maria Silva"
-                  className="w-full px-5 py-3 rounded-full bg-gray-100 border-none focus:ring-4 focus:ring-pink-200 outline-none transition-all"
+                  className="w-full px-6 py-4 rounded-full bg-gray-50 border-2 border-transparent focus:border-pink-200 focus:bg-white focus:ring-0 outline-none transition-all text-lg"
                   required
                 />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-bold mb-1 ml-2 text-gray-600">Data do Evento</label>
+                  <label className="block text-sm font-bold mb-2 ml-4 text-gray-500">Data do Evento</label>
                   <input 
                     type="date" 
                     name="date"
                     value={formData.date}
                     onChange={handleChange}
-                    className="w-full px-5 py-3 rounded-full bg-gray-100 border-none focus:ring-4 focus:ring-pink-200 outline-none transition-all"
+                    className="w-full px-6 py-4 rounded-full bg-gray-50 border-2 border-transparent focus:border-pink-200 focus:bg-white focus:ring-0 outline-none transition-all text-lg"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1 ml-2 text-gray-600">Horário</label>
+                  <label className="block text-sm font-bold mb-2 ml-4 text-gray-500">Horário</label>
                   <input 
                     type="time" 
                     name="time"
                     value={formData.time}
                     onChange={handleChange}
-                    className="w-full px-5 py-3 rounded-full bg-gray-100 border-none focus:ring-4 focus:ring-pink-200 outline-none transition-all"
+                    className="w-full px-6 py-4 rounded-full bg-gray-50 border-2 border-transparent focus:border-pink-200 focus:bg-white focus:ring-0 outline-none transition-all text-lg"
                     required
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1 ml-2 text-gray-600">Local do Evento</label>
+                <label className="block text-sm font-bold mb-2 ml-4 text-gray-500">Local do Evento</label>
                 <input 
                   type="text" 
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
                   placeholder="Bairro em Brasília"
-                  className="w-full px-5 py-3 rounded-full bg-gray-100 border-none focus:ring-4 focus:ring-pink-200 outline-none transition-all"
+                  className="w-full px-6 py-4 rounded-full bg-gray-50 border-2 border-transparent focus:border-pink-200 focus:bg-white focus:ring-0 outline-none transition-all text-lg"
                   required
                 />
               </div>
               <button 
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white text-xl font-kids py-4 rounded-full transition-all flex items-center justify-center space-x-2 mt-4 shadow-lg transform hover:scale-[1.02] active:scale-95 group"
+                className="w-full bg-green-500 hover:bg-green-600 text-white text-2xl font-kids py-5 rounded-full transition-all flex items-center justify-center space-x-3 mt-6 shadow-xl transform hover:scale-[1.02] active:scale-95 group"
               >
-                <MessageCircle size={24} className="group-hover:animate-bounce" />
+                <MessageCircle size={28} className="group-hover:animate-bounce" />
                 <span>Enviar pelo WhatsApp</span>
               </button>
             </form>
-            <p className="text-center text-xs text-gray-400 mt-4">
+            <p className="text-center text-sm text-gray-400 mt-6 font-medium">
               Respondemos rapidinho para garantir sua data! <span className="inline-block animate-wiggle">⚡</span>
             </p>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Quote, Instagram } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
@@ -73,24 +73,14 @@ const Testimonials: React.FC = () => {
           ))}
         </div>
 
-        {/* Botões de Ação com Tamanhos Harmonizados */}
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 max-w-5xl mx-auto">
+        {/* Selo de Avaliação do Google Centrado */}
+        <div className="mt-16 flex justify-center">
           <div 
-            className="flex items-center justify-center space-x-3 bg-green-50 text-green-600 px-8 py-5 rounded-full border-2 border-green-200 shadow-sm transition-all w-full sm:min-w-[360px] cursor-default"
+            className="flex items-center justify-center space-x-3 bg-green-50 text-green-600 px-10 py-5 rounded-full border-2 border-green-200 shadow-sm transition-all cursor-default"
           >
             <span className="font-bold text-lg md:text-xl whitespace-nowrap">Deixe sua avaliação no Google</span>
             <Star size={24} fill="currentColor" className="text-yellow-400 animate-pulse shrink-0" />
           </div>
-
-          <a 
-            href="https://www.instagram.com/brincamovel.oficial?igsh=cm5lMzN3amp3c2J4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center space-x-3 bg-pink-50 hover:bg-pink-100 text-pink-600 px-8 py-5 rounded-full border-2 border-pink-200 shadow-sm transition-all hover:scale-105 group w-full sm:min-w-[360px]"
-          >
-            <Instagram size={24} className="group-hover:rotate-12 transition-transform shrink-0" />
-            <span className="font-bold text-lg md:text-xl whitespace-nowrap">Siga nosso Instagram</span>
-          </a>
         </div>
       </div>
     </section>
