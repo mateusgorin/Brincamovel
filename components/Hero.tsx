@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, Sparkles, MapPin, Palette } from 'lucide-react';
+import { Star, Sparkles, MapPin, Palette, Moon } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -40,10 +40,17 @@ const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 text-center lg:text-left">
-            <div className="inline-flex items-center space-x-2 bg-pink-100 text-pink-600 px-4 py-2 rounded-full mb-6 font-kids shadow-sm hover:scale-105 transition-transform">
-              <MapPin size={18} className="animate-bounce-gentle" />
-              <span>O mais raro de Brasília! <span className="inline-block animate-wiggle">🚐</span></span>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
+              <div className="inline-flex items-center space-x-2 bg-pink-100 text-pink-600 px-4 py-2 rounded-full font-kids shadow-sm hover:scale-105 transition-transform">
+                <MapPin size={18} className="animate-bounce-gentle" />
+                <span>O mais raro de Brasília!</span>
+              </div>
+              <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-full font-kids shadow-sm hover:scale-105 transition-transform">
+                <Moon size={18} className="animate-wiggle" />
+                <span>Diversão Dia & Noite</span>
+              </div>
             </div>
+            
             <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
               Playground móvel <br />
               <span className="text-pink-500">e Pintura <span className="inline-block animate-wiggle">🎨</span></span> <br />
@@ -77,7 +84,8 @@ const Hero: React.FC = () => {
               <img 
                 src={logoUrl} 
                 alt="Brinca Móvel Oficial - Playground Móvel e Piscina de Bolinhas para Festas em Brasília DF"
-                fetchpriority="high"
+                // Fix: use fetchPriority instead of fetchpriority
+                fetchPriority="high"
                 loading="eager"
                 decoding="sync"
                 className={`w-full h-full object-contain transition-all duration-500 scale-[1.15] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}

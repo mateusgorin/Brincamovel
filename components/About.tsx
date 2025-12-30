@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, CheckCircle, Maximize2 } from 'lucide-react';
+import { Heart, CheckCircle, Maximize2, Zap } from 'lucide-react';
 
 const About: React.FC = () => {
   const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -14,7 +14,7 @@ const About: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center gap-16">
           <div className="flex-1 order-2 md:order-1">
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-orange-600 uppercase tracking-tight">CARRETINHA PLAYGROUND <span className="inline-block animate-pulse">✨</span></h2>
-            <div className="space-y-6 text-lg text-gray-700">
+            <div className="grid grid-cols-1 gap-6 text-lg text-gray-700">
               <div className="flex items-start space-x-4 p-4 bg-white/50 rounded-3xl border border-orange-100 shadow-sm transition-transform hover:scale-[1.02] group">
                 <div className="bg-orange-500 p-3 rounded-2xl text-white shrink-0">
                   <Maximize2 size={24} className="group-hover:animate-bounce-gentle" />
@@ -42,6 +42,16 @@ const About: React.FC = () => {
                 <div>
                   <h4 className="font-bold text-xl mb-1 text-blue-700">Diversão Segura</h4>
                   <p className="text-base">Piscina de bolinhas, escorregador, cama elástica e monitores treinados para total tranquilidade.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 p-4 bg-white/50 rounded-3xl border border-yellow-100 shadow-sm transition-transform hover:scale-[1.02] group">
+                <div className="bg-yellow-500 p-3 rounded-2xl text-white shrink-0">
+                  <Zap size={24} className="group-hover:animate-pulse" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl mb-1 text-yellow-700">Iluminação LED de Festa</h4>
+                  <p className="text-base">Equipada com LEDs vibrantes para garantir a diversão até o anoitecer. Sua festa não para quando o sol se põe!</p>
                 </div>
               </div>
             </div>

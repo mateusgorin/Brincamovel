@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Palette, 
@@ -109,7 +108,8 @@ const Services: React.FC = () => {
                  decoding="async"
                  width="224"
                  height="224"
-                 fetchpriority="low"
+                 // Fix: use fetchPriority instead of fetchpriority
+                 fetchPriority="low"
                />
             </div>
 

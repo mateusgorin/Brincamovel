@@ -42,8 +42,8 @@ Aguardo o retorno! ✨`;
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          <div className="lg:w-1/2 text-left">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white flex items-center justify-start gap-3 group cursor-default">
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white flex items-center justify-center lg:justify-start gap-3 group cursor-default">
               Vamos levar a festa para você? 
               <span className="inline-block animate-bounce-gentle transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
                 <svg width="40" height="56" viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-12 md:w-12 md:h-16">
@@ -58,20 +58,22 @@ Aguardo o retorno! ✨`;
                 </svg>
               </span>
             </h2>
-            <p className="text-xl mb-10 text-pink-50 max-w-xl mx-0 leading-relaxed">
+            <p className="text-xl mb-10 text-pink-50 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Entre em contato agora para verificar disponibilidade de data em Brasília e região. Estamos prontos para criar memórias inesquecíveis!
             </p>
 
-            <div className="flex flex-col gap-4 items-start">
+            <div className="flex flex-col gap-4 items-center lg:items-start">
               {/* Botão Instagram */}
               <a 
                 href="https://www.instagram.com/brincamovel.oficial?igsh=cm5lMzN3amp3c2J4"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center lg:justify-start"
+                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center"
               >
                 <div className="bg-pink-100 p-1.5 rounded-full group-hover:bg-pink-200 transition-colors">
-                  <Instagram size={22} className="group-hover:rotate-12 transition-transform" />
+                  <span className="group-hover:rotate-12 transition-transform inline-block">
+                    <Instagram size={22} />
+                  </span>
                 </div>
                 <span>Siga no Instagram</span>
               </a>
@@ -81,7 +83,7 @@ Aguardo o retorno! ✨`;
                 href="https://wa.me/5561984038961" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center lg:justify-start"
+                className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center"
               >
                 <div className="bg-pink-100 p-1.5 rounded-full group-hover:bg-pink-200 transition-colors">
                   <Phone size={22} className="group-hover:animate-wiggle" />

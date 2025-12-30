@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -7,7 +6,7 @@ const images = [
     url: 'https://www.dropbox.com/scl/fi/nswik9dn03pvx0te4nkjl/WhatsApp-Image-2025-12-26-at-14.58.20.jpeg?rlkey=0ri7iqro8daghyk3x9xl3mcxb&st=wrs2eqnp&raw=1', 
     title: <>Pintura Artística 🎭</>,
     alt: "Criança com pintura artística facial feita em evento em Brasília",
-    description: "Transformamos o sonho em cores com pinturas detalhadas e artísticas para todas as idades."
+    description: "Transformamos o sonho em cores with pinturas detalhadas e artísticas para todas as idades."
   },
   { 
     url: 'https://www.dropbox.com/scl/fi/9tf0n7yn7q0y32n45ht10/WhatsApp-Image-2025-12-26-at-14.56.22.jpeg?rlkey=e4tq6jkkqiinns6m6gvfyqq4o&st=t8n6e5r2&raw=1', 
@@ -73,7 +72,7 @@ const images = [
     url: 'https://i.postimg.cc/CL09pxDW/Screenshot-20251225-204915-Whats-App.jpg', 
     title: <>Brasília em Festa <span className="inline-block animate-bounce-gentle">🏙️</span></>,
     alt: "Brinca Móvel Oficial atendendo festas em todo o Distrito Federal",
-    description: "Atendemos todo o DF e entorno com pontualidade e excelência no serviço."
+    description: "Atendemos todo o DF e entorno with pontualidade e excelência no serviço."
   },
 ];
 
@@ -160,7 +159,8 @@ const Gallery: React.FC = () => {
                 decoding="async"
                 width="400"
                 height="400"
-                fetchpriority="low"
+                // Fix: use fetchPriority instead of fetchpriority
+                fetchPriority="low"
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
               />
               <div className="absolute inset-0 bg-pink-500/5 group-hover:bg-transparent transition-colors duration-300"></div>
