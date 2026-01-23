@@ -26,7 +26,7 @@ const App: React.FC = () => {
       <div className="fixed bottom-6 left-6 z-[60] flex items-center gap-3">
         <button
           onClick={toggleDarkMode}
-          className={`theme-toggle-btn p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 flex flex-col items-center justify-center border-2 group ${isDarkMode ? 'bg-gray-800 border-blue-400 text-blue-400' : 'bg-white border-pink-400 text-pink-500'}`}
+          className={`peer theme-toggle-btn p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 flex flex-col items-center justify-center border-2 group ${isDarkMode ? 'bg-gray-800 border-blue-400 text-blue-400' : 'bg-white border-pink-400 text-pink-500'}`}
           aria-label="Alternar modo de iluminação"
         >
           {isDarkMode ? (
@@ -42,8 +42,8 @@ const App: React.FC = () => {
           )}
         </button>
         
-        {/* Legenda do Modo Noturno */}
-        <div className={`px-4 py-2 rounded-2xl border-2 shadow-lg text-xs font-bold font-kids transition-all duration-500 animate-fadeIn ${isDarkMode ? 'bg-blue-900/40 border-blue-400/50 text-blue-300 shadow-[0_0_15px_rgba(0,217,255,0.3)]' : 'bg-white border-pink-200 text-pink-500'}`}>
+        {/* Legenda do Modo Noturno - Aparece apenas com hover no botão (peer-hover) */}
+        <div className={`opacity-0 peer-hover:opacity-100 px-4 py-2 rounded-2xl border-2 shadow-lg text-xs font-bold font-kids transition-all duration-300 ${isDarkMode ? 'bg-blue-900/40 border-blue-400/50 text-blue-300 shadow-[0_0_15px_rgba(0,217,255,0.3)]' : 'bg-white border-pink-200 text-pink-500'}`}>
           {isDarkMode ? 'Iluminação LED ativada! 💡' : 'A carretinha tem iluminação noturna! 💡'}
         </div>
       </div>
