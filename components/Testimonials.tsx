@@ -73,15 +73,24 @@ const Testimonials: React.FC = () => {
           ))}
         </div>
 
-        {/* Selo de Avaliação do Google Centrado com Animação */}
+        {/* Selo de Avaliação do Google Centrado com Animação Pulsante */}
         <div className="mt-16 flex justify-center">
-          <div 
-            className="group flex items-center justify-center space-x-3 bg-green-50 text-green-600 px-10 py-5 rounded-full border-2 border-green-200 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-default"
-          >
-            <span className="font-bold text-lg md:text-xl whitespace-nowrap">Deixe sua avaliação no Google</span>
-            <div className="transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
-              <Star size={24} fill="currentColor" className="text-yellow-400 animate-pulse shrink-0" />
-            </div>
+          <div className="relative">
+            {/* Efeitos de Pulsação (Semelhante ao WhatsApp) */}
+            <div className="absolute inset-0 bg-green-400/30 rounded-full animate-ripple pointer-events-none"></div>
+            <div className="absolute inset-0 bg-green-400/20 rounded-full animate-ripple-delayed pointer-events-none"></div>
+            
+            <a 
+              href="https://g.page/r/CSDfqpHMzpq9EBM/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group flex items-center justify-center space-x-3 bg-green-50 text-green-600 px-10 py-5 rounded-full border-2 border-green-200 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-lg"
+            >
+              <span className="font-bold text-lg md:text-xl whitespace-nowrap">Deixe sua avaliação no Google</span>
+              <div className="transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
+                <Star size={24} fill="currentColor" className="text-yellow-400 animate-spin-slow shrink-0" />
+              </div>
+            </a>
           </div>
         </div>
       </div>

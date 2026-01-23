@@ -84,7 +84,6 @@ const Hero: React.FC = () => {
               <img 
                 src={logoUrl} 
                 alt="Brinca Móvel Oficial - Playground Móvel e Piscina de Bolinhas para Festas em Brasília DF"
-                // Fix: use fetchPriority instead of fetchpriority
                 fetchPriority="high"
                 loading="eager"
                 decoding="sync"

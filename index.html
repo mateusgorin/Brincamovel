@@ -11,11 +11,16 @@
     <meta name="author" content="Brinca Móvel Oficial" />
     <link rel="canonical" href="https://brincamovel.com.br" />
 
-    <!-- Open Graph / Social Media -->
+    <!-- Open Graph / Social Media (Para Google e redes sociais) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://brincamovel.com.br" />
     <meta property="og:title" content="Brinca Móvel Oficial | Playground Móvel em Brasília" />
     <meta property="og:description" content="Transforme sua festa com o playground móvel mais raro de Brasília. Piscina de bolinhas e pintura facial." />
+    <meta property="og:image" content="https://i.postimg.cc/26Lsc5tK/result-goro.png" />
+
+    <!-- Favicon e Ícone Google -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/26Lsc5tK/result-goro.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/26Lsc5tK/result-goro.png">
 
     <!-- Schema.org LocalBusiness (SEO Local) -->
     <script type="application/ld+json">
@@ -26,6 +31,7 @@
       "alternateName": "Brinca Móvel Brasília",
       "description": "Playground móvel e recreação infantil em Brasília e DF.",
       "url": "https://brincamovel.com.br",
+      "image": "https://i.postimg.cc/26Lsc5tK/result-goro.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Brasília",
@@ -37,29 +43,11 @@
         "latitude": "-15.7942",
         "longitude": "-47.8822"
       },
-      "hasMap": "https://www.google.com/maps?q=Brasilia+DF",
-      "areaServed": "Distrito Federal",
       "telephone": "+5561984038961",
-      "priceRange": "$$",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "20:00"
-      }
+      "priceRange": "$$"
     }
     </script>
 
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/26Lsc5tK/result-goro.png">
-    
     <link rel="preconnect" href="https://i.postimg.cc">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,187 +114,90 @@
       .animate-fadeIn {
         animation: fadeIn 0.3s ease-out forwards;
       }
-      
-      /* WhatsApp Pulse Effects */
-      @keyframes ripple-pulse {
+      @keyframes ripple {
         0% { transform: scale(1); opacity: 0.6; }
-        100% { transform: scale(1.8); opacity: 0; }
+        100% { transform: scale(1.4); opacity: 0; }
       }
       .animate-ripple {
-        animation: ripple-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        animation: ripple 2s infinite;
       }
       .animate-ripple-delayed {
-        animation: ripple-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        animation-delay: 1s;
+        animation: ripple 2s infinite 1s;
       }
 
-      /* MODO ESCURO - CYBER PARTY NEON STYLE */
+      /* SISTEMA NEON MODO ESCURO */
       .dark-mode {
         --bg-deep: #050507;
         --bg-card: #0d0d12;
         --neon-pink: #ff007f;
-        --neon-pink-glow: rgba(255, 0, 127, 0.5);
-        --neon-orange: #ff9d00;
-        --neon-orange-glow: rgba(255, 157, 0, 0.5);
+        --neon-pink-glow: rgba(255, 0, 127, 0.6);
         --neon-blue: #00d9ff;
-        --neon-blue-glow: rgba(0, 217, 255, 0.5);
+        --neon-blue-glow: rgba(0, 217, 255, 0.6);
+        --neon-orange: #ff9d00;
+        --neon-orange-glow: rgba(255, 157, 0, 0.6);
         --neon-purple: #bc13fe;
-        --neon-purple-glow: rgba(188, 19, 254, 0.5);
-        --neon-yellow: #facc15;
-        --neon-yellow-glow: rgba(250, 204, 21, 0.5);
-        --neon-red: #ef4444;
-        --neon-red-glow: rgba(239, 68, 68, 0.5);
-        --neon-green: #22c55e;
-        --neon-green-glow: rgba(34, 197, 94, 0.5);
-        --neon-sky: #0ea5e9;
-        --neon-sky-glow: rgba(14, 165, 233, 0.5);
+        --neon-purple-glow: rgba(188, 19, 254, 0.6);
+        --neon-green: #39ff14;
+        --neon-green-glow: rgba(57, 255, 20, 0.6);
         
         background-color: var(--bg-deep) !important;
         color: #e2e8f0;
       }
 
-      /* Estilização Geral Dark Mode - Corrigindo blocos remanescentes */
-      .dark-mode section,
-      .dark-mode footer,
-      .dark-mode .bg-pink-50, 
-      .dark-mode .bg-orange-50, 
+      .dark-mode section, 
+      .dark-mode footer, 
       .dark-mode .bg-white,
-      .dark-mode .bg-white\/95,
-      .dark-mode .from-pink-50,
-      .dark-mode .to-white,
-      .dark-mode #inicio,
-      .dark-mode #servicos,
-      .dark-mode #sobre,
-      .dark-mode #galeria,
-      .dark-mode #depoimentos {
+      .dark-mode .bg-pink-50,
+      .dark-mode .bg-orange-50 {
         background-color: var(--bg-deep) !important;
         background-image: none !important;
       }
 
-      .dark-mode .bg-white\/50 {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-      }
-
-      /* Títulos e Textos Neon */
-      .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+      /* Títulos Neon */
+      .dark-mode h1, .dark-mode h2, .dark-mode h3 {
         color: #fff !important;
-        text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 20px var(--neon-pink-glow);
       }
 
-      .dark-mode .text-gray-600, .dark-mode .text-gray-700, .dark-mode .text-gray-500 {
-        color: #cbd5e1 !important;
+      /* Efeito Neon em Blocos e Cards */
+      .dark-mode .group, 
+      .dark-mode .rounded-\[2\.5rem\],
+      .dark-mode .rounded-\[3rem\],
+      .dark-mode .rounded-\[3\.5rem\] {
+        background-color: var(--bg-card) !important;
+        border-width: 2px !important;
+        transition: all 0.3s ease;
       }
 
-      /* Bordas Neon Globais */
-      .dark-mode .border-white,
-      .dark-mode .border-gray-50,
-      .dark-mode .border-pink-100,
-      .dark-mode .border-orange-100 {
-        border-color: rgba(255, 255, 255, 0.1) !important;
-      }
+      /* Variantes de cores neon para bordas e glow */
+      .dark-mode .border-pink-200, .dark-mode .border-pink-100 { border-color: var(--neon-pink) !important; box-shadow: 0 0 15px var(--neon-pink-glow); }
+      .dark-mode .border-blue-200, .dark-mode .border-blue-100 { border-color: var(--neon-blue) !important; box-shadow: 0 0 15px var(--neon-blue-glow); }
+      .dark-mode .border-orange-200, .dark-mode .border-orange-100 { border-color: var(--neon-orange) !important; box-shadow: 0 0 15px var(--neon-orange-glow); }
+      .dark-mode .border-purple-200 { border-color: var(--neon-purple) !important; box-shadow: 0 0 15px var(--neon-purple-glow); }
+      .dark-mode .border-green-200 { border-color: var(--neon-green) !important; box-shadow: 0 0 15px var(--neon-green-glow); }
+      .dark-mode .border-white { border-color: var(--neon-blue) !important; box-shadow: 0 0 20px var(--neon-blue-glow); }
 
-      /* Seção HERO Neon */
-      .dark-mode #inicio .border-white {
+      /* Neon em Imagens */
+      .dark-mode img {
+        filter: brightness(1.1) contrast(1.1);
+      }
+      .dark-mode .overflow-hidden:has(img) {
         border-color: var(--neon-pink) !important;
-        box-shadow: 0 0 30px var(--neon-pink-glow) !important;
+        box-shadow: 0 0 25px var(--neon-pink-glow);
+      }
+
+      /* Botões em Modo Dark */
+      .dark-mode .bg-white.text-pink-600 {
         background-color: #000 !important;
+        color: #fff !important;
+        border: 2px solid var(--neon-pink) !important;
+        box-shadow: 0 0 10px var(--neon-pink-glow);
       }
-      .dark-mode #inicio .bg-pink-100 { background-color: rgba(255,0,127,0.1) !important; border: 1px solid var(--neon-pink); }
-      .dark-mode #inicio .bg-blue-100 { background-color: rgba(0,217,255,0.1) !important; border: 1px solid var(--neon-blue); }
 
-      /* Seção SOBRE (Carretinha Playground) Neon */
-      .dark-mode #sobre .border-orange-100 { border-color: var(--neon-orange) !important; box-shadow: 0 0 20px var(--neon-orange-glow) !important; border-width: 2px !important; }
-      .dark-mode #sobre .border-pink-100 { border-color: var(--neon-pink) !important; box-shadow: 0 0 20px var(--neon-pink-glow) !important; border-width: 2px !important; }
-      .dark-mode #sobre .border-blue-100 { border-color: var(--neon-blue) !important; box-shadow: 0 0 20px var(--neon-blue-glow) !important; border-width: 2px !important; }
-      .dark-mode #sobre .border-yellow-100 { border-color: var(--neon-yellow) !important; box-shadow: 0 0 20px var(--neon-yellow-glow) !important; border-width: 2px !important; }
-      
-      .dark-mode #sobre .animate-bounce-gentle .border-white { border-width: 3px !important; }
-      .dark-mode #sobre .animate-bounce-gentle:nth-child(1) .border-white { border-color: var(--neon-orange) !important; box-shadow: 0 0 20px var(--neon-orange-glow) !important; }
-      .dark-mode #sobre .animate-bounce-gentle:nth-child(2) .border-white { border-color: var(--neon-pink) !important; box-shadow: 0 0 20px var(--neon-pink-glow) !important; }
-      .dark-mode #sobre .animate-bounce-gentle:nth-child(3) .border-white { border-color: var(--neon-blue) !important; box-shadow: 0 0 20px var(--neon-blue-glow) !important; }
-      .dark-mode #sobre .animate-bounce-gentle:nth-child(4) .border-white { border-color: var(--neon-yellow) !important; box-shadow: 0 0 20px var(--neon-yellow-glow) !important; }
-
-      /* Seção SERVIÇOS (O que tem na carretinha) Neon */
-      .dark-mode #servicos .group {
-        background-color: var(--bg-card) !important;
-        border-width: 3px !important;
-        transition: all 0.4s ease;
-      }
-      .dark-mode #servicos .border-orange-200 { border-color: var(--neon-orange) !important; box-shadow: 0 0 20px var(--neon-orange-glow) !important; }
-      .dark-mode #servicos .border-blue-200 { border-color: var(--neon-blue) !important; box-shadow: 0 0 20px var(--neon-blue-glow) !important; }
-      .dark-mode #servicos .border-pink-200 { border-color: var(--neon-pink) !important; box-shadow: 0 0 20px var(--neon-pink-glow) !important; }
-      .dark-mode #servicos .border-purple-200 { border-color: var(--neon-purple) !important; box-shadow: 0 0 20px var(--neon-purple-glow) !important; }
-      .dark-mode #servicos .border-yellow-200 { border-color: var(--neon-yellow) !important; box-shadow: 0 0 20px var(--neon-yellow-glow) !important; }
-      .dark-mode #servicos .border-red-100 { border-color: var(--neon-red) !important; box-shadow: 0 0 20px var(--neon-red-glow) !important; }
-      .dark-mode #servicos .border-green-200 { border-color: var(--neon-green) !important; box-shadow: 0 0 20px var(--neon-green-glow) !important; }
-      .dark-mode #servicos .border-sky-100 { border-color: var(--neon-sky) !important; box-shadow: 0 0 20px var(--neon-sky-glow) !important; }
-
-      /* Bloco Pintura Facial Neon */
-      .dark-mode #servicos .from-blue-100 {
-        background-color: var(--bg-card) !important;
-        border-color: var(--neon-blue) !important;
-        box-shadow: 0 0 40px var(--neon-blue-glow) !important;
-        border-width: 4px !important;
-      }
-      .dark-mode #servicos .from-blue-100 .border-white { border-color: var(--neon-blue) !important; }
-
-      /* Seção VÍDEOS Neon */
-      .dark-mode section:has(.video) .border-white,
-      .dark-mode #servicos + section .border-white {
+      .dark-mode input {
+        background-color: #000 !important;
         border-color: var(--neon-pink) !important;
-        box-shadow: 0 0 30px var(--neon-pink-glow) !important;
-      }
-      .dark-mode .aspect-\[9\/16\] {
-        border: 4px solid var(--neon-pink) !important;
-        box-shadow: 0 0 30px var(--neon-pink-glow) !important;
-      }
-
-      /* Galeria Neon */
-      .dark-mode #galeria .group {
-        border-color: var(--neon-blue) !important;
-        box-shadow: 0 0 15px var(--neon-blue-glow) !important;
-        background-color: #000 !important;
-      }
-      .dark-mode #galeria .group:hover {
-        box-shadow: 0 0 30px var(--neon-blue) !important;
-      }
-
-      /* Depoimentos Neon */
-      .dark-mode #depoimentos .group {
-        background-color: var(--bg-card) !important;
-        border-width: 3px !important;
-      }
-      .dark-mode #depoimentos .border-pink-200 { border-color: var(--neon-pink) !important; box-shadow: 0 0 20px var(--neon-pink-glow) !important; }
-      .dark-mode #depoimentos .border-blue-200 { border-color: var(--neon-blue) !important; box-shadow: 0 0 20px var(--neon-blue-glow) !important; }
-      .dark-mode #depoimentos .border-orange-200 { border-color: var(--neon-orange) !important; box-shadow: 0 0 20px var(--neon-orange-glow) !important; }
-
-      /* Seção Contato Neon */
-      .dark-mode #contato { background-color: #000 !important; border-top: 2px solid var(--neon-pink); }
-      .dark-mode #contato .bg-white { 
-        background-color: var(--bg-card) !important; 
-        border: 2px solid var(--neon-pink) !important; 
-        box-shadow: 0 0 40px var(--neon-pink-glow) !important;
-      }
-      .dark-mode #contato input { 
-        background-color: #000 !important; 
-        border-color: rgba(255,255,255,0.1) !important; 
-        color: #fff !important; 
-      }
-      .dark-mode #contato input:focus { border-color: var(--neon-pink) !important; box-shadow: 0 0 15px var(--neon-pink-glow) !important; }
-
-      /* Floating Toggle Button */
-      .dark-mode .theme-toggle-btn {
-        background-color: var(--bg-card);
-        color: var(--neon-blue);
-        box-shadow: 0 0 25px var(--neon-blue-glow);
-        border-color: var(--neon-blue) !important;
-      }
-
-      /* Waves Adjustment */
-      .dark-mode .fill-white { fill: var(--bg-deep) !important; }
-      .dark-mode nav { 
-        background-color: rgba(5, 5, 7, 0.95) !important; 
-        border-bottom: 1px solid rgba(255,255,255,0.1) !important; 
+        color: #fff !important;
       }
     </style>
     <script type="importmap">

@@ -47,13 +47,9 @@ Aguardo o retorno! ✨`;
               Vamos levar a festa para você? 
               <span className="inline-block animate-bounce-gentle transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
                 <svg width="40" height="56" viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-12 md:w-12 md:h-16">
-                  {/* Corpo do Balão Amarelo */}
                   <path d="M20 36C31.0457 36 40 27.9411 40 18C40 8.05888 31.0457 0 20 0C8.9543 0 0 8.05888 0 18C0 27.9411 8.9543 36 20 36Z" fill="#FACC15"/>
-                  {/* Brilho */}
                   <path d="M12 8C9.6 9.6 8 12 8 16" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.5"/>
-                  {/* Nó */}
                   <path d="M20 36L17.6 40H22.4L20 36Z" fill="#EAB308"/>
-                  {/* Fita Azul */}
                   <path d="M20 40C20 40 28 44 20 48C12 52 20 56 20 56" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
                 </svg>
               </span>
@@ -71,9 +67,7 @@ Aguardo o retorno! ✨`;
                 className="inline-flex items-center space-x-3 bg-white text-pink-600 px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95 group font-bold text-lg w-full max-w-[280px] justify-center"
               >
                 <div className="bg-pink-100 p-1.5 rounded-full group-hover:bg-pink-200 transition-colors">
-                  <span className="group-hover:rotate-12 transition-transform inline-block">
-                    <Instagram size={22} />
-                  </span>
+                  <Instagram size={22} className="group-hover:rotate-12 transition-transform" />
                 </div>
                 <span>Siga no Instagram</span>
               </a>
@@ -152,9 +146,6 @@ Aguardo o retorno! ✨`;
                 <span>Enviar pelo WhatsApp</span>
               </button>
             </form>
-            <p className="text-center text-sm text-gray-400 mt-6 font-medium">
-              Respondemos rapidinho para garantir sua data! <span className="inline-block animate-wiggle">⚡</span>
-            </p>
           </div>
         </div>
       </div>
