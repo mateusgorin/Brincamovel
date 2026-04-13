@@ -90,7 +90,7 @@ const AgendaSemanal: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full h-48 sm:h-64 md:h-full"
+              className="w-full md:h-full"
             >
               <div className="relative group h-full">
                 <div className="absolute -inset-4 bg-orange-200 rounded-[2rem] md:rounded-[3rem] blur-2xl opacity-30 group-hover:opacity-50 transition-opacity hidden md:block"></div>
@@ -98,7 +98,7 @@ const AgendaSemanal: React.FC = () => {
                   <img 
                     src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776085511/Picsart_26-04-13_10-00-34-253_tz8y3a.png" 
                     alt="Brinca Móvel Diversão" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto md:h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </div>

@@ -8,7 +8,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <section id="sobre" className="py-16 md:py-24 bg-orange-50 relative overflow-hidden">
+    <section id="sobre" className="py-16 md:py-24 bg-orange-50 relative overflow-hidden -mt-2 md:mt-0">
       <div className="absolute top-0 left-0 w-64 h-64 bg-yellow-200/50 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +18,7 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="flex-1 order-2 md:order-1"
+            className="flex-1"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-orange-600 uppercase tracking-tight text-center md:text-left">CARRETINHA PLAYGROUND <span className="inline-block animate-pulse">⭐</span></h2>
             <div className="grid grid-cols-1 gap-4 md:gap-6 text-base md:text-lg text-gray-700">
@@ -69,7 +69,7 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex-1 order-1 md:order-2 w-full"
+            className="flex-1 w-full"
           >
             <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div className="animate-bounce-gentle" style={{ animationDuration: '4s', animationDelay: '0s' }}>
