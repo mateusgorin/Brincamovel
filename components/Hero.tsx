@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
                 height="420"
               />
             </div>
-            <div className="absolute inset-0 md:-inset-2 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-30" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute -inset-4 md:-inset-8 bg-yellow-200 blob-shape -z-10 animate-pulse opacity-30" style={{ animationDelay: '1s' }}></div>
           </motion.div>
         </div>
       </div>
