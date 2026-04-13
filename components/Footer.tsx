@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, ExternalLink } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const Footer: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -22,11 +23,17 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-white py-12 border-t border-pink-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+      >
         <div className="flex items-center justify-center space-x-3 mb-6">
           <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400 shadow-sm bg-pink-50">
             <img 
-              src="https://i.postimg.cc/26Lsc5tK/result-goro.png" 
+              src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
               alt="Brinca Móvel Oficial Logo Footer" 
               className="w-full h-full object-cover lazy-image"
               loading="lazy"
@@ -47,11 +54,13 @@ const Footer: React.FC = () => {
           Levando a magia do playground e a arte da pintura para todos os cantos do Distrito Federal.
         </p>
         
-        <div className="flex justify-center space-x-8 mb-8 text-gray-500">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8 text-gray-500">
           <a href="#" onClick={(e) => handleNavClick(e, '#')} className="hover:text-pink-500 transition-colors font-kids">Início</a>
-          <a href="#sobre" onClick={(e) => handleNavClick(e, '#sobre')} className="hover:text-pink-500 transition-colors font-kids">Sobre</a>
+          <a href="#sobre" onClick={(e) => handleNavClick(e, '#sobre')} className="hover:text-pink-500 transition-colors font-kids">O que é?</a>
           <a href="#servicos" onClick={(e) => handleNavClick(e, '#servicos')} className="hover:text-pink-500 transition-colors font-kids">Atrações</a>
           <a href="#galeria" onClick={(e) => handleNavClick(e, '#galeria')} className="hover:text-pink-500 transition-colors font-kids">Galeria</a>
+          <a href="#depoimentos" onClick={(e) => handleNavClick(e, '#depoimentos')} className="hover:text-pink-500 transition-colors font-kids">Clientes</a>
+          <a href="#agenda" onClick={(e) => handleNavClick(e, '#agenda')} className="hover:text-pink-500 transition-colors font-kids">Agenda</a>
         </div>
         
         <div className="text-sm text-gray-400 border-t pt-8">
@@ -80,7 +89,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };

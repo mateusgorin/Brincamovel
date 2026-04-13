@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MessageCircle, Phone, Instagram } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const Contact: React.FC = () => {
 *Horário:* ${formData.time || 'Não informado'}
 *Local do Evento:* ${formData.location || 'Não informado'}
 
-Aguardo o retorno! ✨`;
+Aguardo o retorno! ⭐`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5561984038961?text=${encodedMessage}`;
@@ -42,7 +43,13 @@ Aguardo o retorno! ✨`;
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          <div className="lg:w-1/2 text-center lg:text-left">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:w-1/2 text-center lg:text-left"
+          >
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white flex items-center justify-center lg:justify-start gap-3 group cursor-default">
               Vamos levar a festa para você? 
               <span className="inline-block animate-bounce-gentle transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
@@ -85,9 +92,15 @@ Aguardo o retorno! ✨`;
                 <span>(61) 98403-8961</span>
               </a>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="lg:w-1/2 w-full max-w-md bg-white text-gray-800 p-8 rounded-[3.5rem] shadow-2xl mx-auto lg:mx-0">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:w-1/2 w-full max-w-md bg-white text-gray-800 p-8 rounded-[3.5rem] shadow-2xl mx-auto lg:mx-0 border-4 border-pink-200"
+          >
             <h3 className="text-3xl font-bold mb-8 text-pink-500 text-center">Peça seu orçamento</h3>
             <form className="space-y-5" onSubmit={handleWhatsAppSubmit}>
               <div>
@@ -142,11 +155,11 @@ Aguardo o retorno! ✨`;
                 type="submit"
                 className="w-full bg-green-500 hover:bg-green-600 text-white text-2xl font-kids py-5 rounded-full transition-all flex items-center justify-center space-x-3 mt-6 shadow-xl transform hover:scale-[1.02] active:scale-95 group"
               >
-                <MessageCircle size={28} className="group-hover:animate-bounce" />
+                <MessageCircle size={28} className="group-hover:animate-bounce max-md:mb-0 max-md:mt-0 max-md:ml-[21px] max-md:pt-0 max-md:pl-0" />
                 <span>Enviar pelo WhatsApp</span>
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

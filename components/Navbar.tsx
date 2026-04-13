@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
     { name: 'Atrações', href: '#servicos' },
     { name: 'Galeria', href: '#galeria' },
     { name: 'Clientes', href: '#depoimentos' },
+    { name: 'Agenda', href: '#agenda' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -45,21 +46,21 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 top-0 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md h-16' : 'bg-white h-20'} border-b border-pink-100 dark:border-white/10`}>
+    <nav className={`fixed w-full z-50 top-0 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md h-16' : 'bg-white h-20'} border-b border-pink-100`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex justify-between items-center h-full">
-          <div className="flex-shrink-0 flex items-center space-x-3 cursor-pointer" onClick={(e) => handleNavClick(e as any, '#')}>
-            <div className="w-10 h-10 bg-pink-100 dark:bg-pink-900/30 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
+          <div className="flex-shrink-0 flex items-center space-x-2 sm:space-x-3 cursor-pointer" onClick={(e) => handleNavClick(e as any, '#')}>
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
               <img 
-                src="https://i.postimg.cc/26Lsc5tK/result-goro.png" 
+                src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
                 alt="Brinca Móvel Oficial Logo" 
                 className="w-full h-full object-cover scale-110"
               />
             </div>
-            <span className="text-lg lg:text-xl font-bold tracking-tight">
+            <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight">
               <span className="text-pink-500">Brinca</span>
               <span className="text-orange-500">Móvel</span>
-              <span className="text-blue-500 ml-1">Oficial</span>
+              <span className="text-blue-500 ml-1 hidden sm:inline">Oficial</span>
             </span>
           </div>
           
@@ -70,7 +71,7 @@ const Navbar: React.FC = () => {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-gray-600 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-kids transition-colors px-1.5 lg:px-3 py-2 text-sm lg:text-lg font-medium whitespace-nowrap inline-block"
+                  className="text-gray-800 hover:text-pink-500 font-kids transition-colors px-1.5 lg:px-3 py-2 text-sm lg:text-lg font-medium whitespace-nowrap inline-block"
                 >
                   {item.name}
                 </a>
@@ -99,14 +100,14 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-b border-pink-100 dark:border-white/10 absolute top-full left-0 w-full shadow-xl">
+        <div className="md:hidden bg-white border-b border-pink-100 absolute top-full left-0 w-full shadow-xl">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {menuItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-gray-600 dark:text-gray-300 hover:text-pink-500 block px-3 py-4 rounded-md text-lg font-medium font-kids border-b border-gray-50 dark:border-white/5 last:border-0"
+                className="text-gray-800 hover:text-pink-500 block px-3 py-4 rounded-md text-lg font-medium font-kids border-b border-gray-50 last:border-0"
               >
                 {item.name}
               </a>
