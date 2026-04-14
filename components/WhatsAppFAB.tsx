@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react';
 
 const WhatsAppFAB: React.FC = () => {
   return (
-    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3 pointer-events-none">
+    <div className="whatsapp-fab-container fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3 pointer-events-none">
       <div className="relative pointer-events-auto flex items-center justify-center">
         {/* Efeitos de Pulsação (Ondas) */}
         <div className="absolute inset-0 bg-green-400 rounded-full animate-ripple pointer-events-none"></div>

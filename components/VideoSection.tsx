@@ -60,7 +60,7 @@ const VideoSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`flex flex-col items-center group video-container ${index === 2 ? 'sm:col-span-2 md:col-span-1 sm:mx-auto' : ''}`}
+                className="flex flex-col items-center group video-container"
               >
                 <div className={`relative w-full max-w-[260px] sm:max-w-[280px] md:max-w-full aspect-[9/16] rounded-3xl overflow-hidden border-2 shadow-lg ${borderClasses[index]}`}>
                   <video 
