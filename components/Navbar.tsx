@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Calendar, MessageCircle } from 'lucide-react';
+import { Menu, X, Calendar, MessageCircle, Info, Star, Image as ImageIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,12 +14,43 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.scrollBehavior = '';
+      document.body.classList.remove('mobile-menu-open');
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.scrollBehavior = '';
+      document.body.classList.remove('mobile-menu-open');
+    };
+  }, [isOpen]);
+
   const menuItems = [
-    { name: 'O que é?', href: '#sobre' },
-    { name: 'Atrações', href: '#servicos' },
-    { name: 'Galeria', href: '#galeria' },
-    { name: 'Clientes', href: '#depoimentos' },
-    { name: 'Agenda', href: '#agenda' },
+    { name: 'O que é?', href: '#sobre', icon: Info },
+    { name: 'Atrações', href: '#servicos', icon: Star },
+    { name: 'Galeria', href: '#galeria', icon: ImageIcon },
+    { name: 'Clientes', href: '#depoimentos', icon: MessageCircle },
+    { name: 'Agenda', href: '#agenda', icon: Calendar },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -46,111 +78,142 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 top-0 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md h-16' : 'bg-white h-20'} border-b border-pink-100`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex justify-between items-center h-full">
-          <div className="flex-shrink-0 flex items-center space-x-2 sm:space-x-3 cursor-pointer" onClick={(e) => handleNavClick(e as any, '#')}>
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
-              <img 
-                src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
-                alt="Brinca Móvel Oficial Logo" 
-                className="w-full h-full object-cover scale-110"
-              />
+    <>
+      <nav className={`fixed w-full z-50 top-0 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md h-16' : 'bg-white h-20'} border-b border-pink-100`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          <div className="flex justify-between items-center h-full">
+            <div className="flex-shrink-0 flex items-center space-x-2 sm:space-x-3 cursor-pointer" onClick={(e) => handleNavClick(e as any, '#')}>
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
+                <img 
+                  src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
+                  alt="Brinca Móvel Oficial Logo" 
+                  className="w-full h-full object-cover scale-110"
+                />
+              </div>
+              <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight">
+                <span className="text-pink-500">Brinca</span>
+                <span className="text-orange-500">Móvel</span>
+                <span className="text-blue-500 ml-1 hidden sm:inline">Oficial</span>
+              </span>
             </div>
-            <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight">
-              <span className="text-pink-500">Brinca</span>
-              <span className="text-orange-500">Móvel</span>
-              <span className="text-blue-500 ml-1 hidden sm:inline">Oficial</span>
-            </span>
-          </div>
-          
-          <div className="hidden md:block">
-            <div className="ml-2 lg:ml-10 flex items-center space-x-1 lg:space-x-6">
-              {menuItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-gray-800 hover:text-pink-500 font-kids transition-colors px-1.5 lg:px-3 py-2 text-sm lg:text-lg font-medium whitespace-nowrap inline-block"
+            
+            <div className="hidden md:block">
+              <div className="ml-2 lg:ml-10 flex items-center space-x-1 lg:space-x-6">
+                {menuItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="text-gray-800 hover:text-pink-500 font-kids transition-colors px-1.5 lg:px-3 py-2 text-sm lg:text-lg font-medium whitespace-nowrap inline-block"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <a 
+                  href="#contato"
+                  onClick={(e) => handleNavClick(e, '#contato')}
+                  className="group relative inline-flex items-center space-x-1 lg:space-x-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-kids px-3 lg:px-6 py-2 lg:py-2.5 rounded-full transition-all transform hover:scale-105 hover:shadow-lg ml-1 lg:ml-4 shadow-pink-200/50 whitespace-nowrap"
                 >
-                  {item.name}
+                  <Calendar size={16} className="group-hover:rotate-12 transition-transform group-hover:animate-wiggle" />
+                  <span className="text-xs lg:text-base">Reservar <span className="hidden lg:inline">Data</span></span>
                 </a>
-              ))}
-              <a 
-                href="#contato"
-                onClick={(e) => handleNavClick(e, '#contato')}
-                className="group relative inline-flex items-center space-x-1 lg:space-x-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-kids px-3 lg:px-6 py-2 lg:py-2.5 rounded-full transition-all transform hover:scale-105 hover:shadow-lg ml-1 lg:ml-4 shadow-pink-200/50 whitespace-nowrap"
-              >
-                <Calendar size={16} className="group-hover:rotate-12 transition-transform group-hover:animate-wiggle" />
-                <span className="text-xs lg:text-base">Reservar <span className="hidden lg:inline">Data</span></span>
-              </a>
+              </div>
             </div>
-          </div>
 
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(true)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-pink-500 hover:text-pink-600 focus:outline-none"
-            >
-              <Menu size={28} />
-            </button>
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-pink-500 hover:text-pink-600 focus:outline-none"
+              >
+                <Menu size={28} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Full-Screen */}
-      <div 
-        className={`md:hidden fixed inset-0 bg-white z-[100] transform transition-all duration-300 ease-in-out flex flex-col ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
-      >
-        <div className="flex justify-between items-center px-4 sm:px-6 h-20 border-b border-pink-100">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
-              <img 
-                src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
-                alt="Logo" 
-                className="w-full h-full object-cover scale-110"
-              />
-            </div>
-            <span className="text-base font-bold tracking-tight">
-              <span className="text-pink-500">Brinca</span><span className="text-orange-500">Móvel</span>
-            </span>
-          </div>
-          <button
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="md:hidden fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm touch-none"
             onClick={() => setIsOpen(false)}
-            className="p-2 text-pink-500 hover:text-pink-600 focus:outline-none bg-pink-50 rounded-full"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Menu Bottom Sheet */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="md:hidden fixed bottom-0 left-0 right-0 z-[70] max-h-[70vh] bg-white rounded-t-[2.5rem] shadow-2xl flex flex-col overflow-hidden touch-none"
           >
-            <X size={28} />
-          </button>
-        </div>
-        
-        <div className="flex-1 flex flex-col items-center justify-center p-6 overflow-y-auto">
-          <div className="flex flex-col items-center space-y-8 w-full">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-gray-800 hover:text-pink-500 text-3xl font-medium font-kids transition-colors"
+            <div className="flex justify-center pt-4 pb-2 cursor-grab active:cursor-grabbing">
+              <div className="w-12 h-1.5 bg-gray-200 rounded-full"></div>
+            </div>
+            
+            <div className="flex justify-between items-center px-5 py-3 border-b border-pink-100 touch-none">
+              <div className="flex items-center space-x-2">
+                <div className="w-7 h-7 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
+                  <img 
+                    src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
+                    alt="Logo" 
+                    className="w-full h-full object-cover scale-110"
+                  />
+                </div>
+                <span className="text-base font-bold tracking-tight">
+                  <span className="text-pink-500">Brinca</span><span className="text-orange-500">Móvel</span>
+                </span>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-pink-500 hover:text-pink-600 focus:outline-none bg-pink-50 rounded-full"
               >
-                {item.name}
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto px-6 py-2 overscroll-contain touch-pan-y">
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="flex items-center gap-4 py-3 border-b border-gray-50 text-base font-kids font-medium text-gray-700 active:text-pink-500 active:bg-pink-50/50 transition-colors"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-pink-50 flex items-center justify-center">
+                      <Icon size={16} className="text-pink-500" />
+                    </div>
+                    {item.name}
+                  </a>
+                );
+              })}
+            </div>
+            
+            <div className="px-5 py-4 bg-gray-50/80 border-t border-gray-100 touch-none">
+              <a
+                href="https://wa.me/5561984038961"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#25D366] text-white py-3 rounded-2xl font-bold font-kids text-base flex items-center justify-center gap-3 shadow-lg active:scale-95 transition-transform"
+              >
+                <MessageCircle size={24} />
+                <span>Reservar pelo WhatsApp</span>
               </a>
-            ))}
-          </div>
-          
-          <div className="mt-12 w-full max-w-xs">
-            <a
-              href="https://wa.me/5561984038961"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center space-x-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-6 py-4 rounded-full text-xl font-bold font-kids text-center shadow-lg active:scale-95 transition-transform w-full"
-            >
-              <MessageCircle size={24} className="animate-bounce-gentle" />
-              <span>Reservar</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
