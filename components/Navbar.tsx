@@ -98,45 +98,53 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <div 
-          className="md:hidden fixed inset-0 bg-black/20 z-[55] backdrop-blur-sm"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Full-Screen */}
       <div 
-        className={`md:hidden fixed top-0 right-0 w-1/2 h-screen bg-white shadow-2xl z-[60] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`md:hidden fixed inset-0 bg-white z-[100] transform transition-all duration-300 ease-in-out flex flex-col ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
       >
-        <div className="flex justify-end items-center p-4 h-20 border-b border-pink-100">
+        <div className="flex justify-between items-center px-4 sm:px-6 h-20 border-b border-pink-100">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-pink-100 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-400">
+              <img 
+                src="https://res.cloudinary.com/dw5b0vlbz/image/upload/f_auto,q_auto,w_800/v1776103171/result-goro_nosw9r.png" 
+                alt="Logo" 
+                className="w-full h-full object-cover scale-110"
+              />
+            </div>
+            <span className="text-base font-bold tracking-tight">
+              <span className="text-pink-500">Brinca</span><span className="text-orange-500">Móvel</span>
+            </span>
+          </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-pink-500 hover:text-pink-600 focus:outline-none"
+            className="p-2 text-pink-500 hover:text-pink-600 focus:outline-none bg-pink-50 rounded-full"
           >
             <X size={28} />
           </button>
         </div>
-        <div className="px-3 py-4 space-y-1 overflow-y-auto h-[calc(100vh-80px)]">
-          {menuItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="text-gray-800 hover:text-pink-500 block px-2 py-3 rounded-md text-base font-medium font-kids border-b border-gray-50 last:border-0"
-            >
-              {item.name}
-            </a>
-          ))}
-          <div className="pt-6">
+        
+        <div className="flex-1 flex flex-col items-center justify-center p-6 overflow-y-auto">
+          <div className="flex flex-col items-center space-y-8 w-full">
+            {menuItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="text-gray-800 hover:text-pink-500 text-3xl font-medium font-kids transition-colors"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          
+          <div className="mt-12 w-full max-w-xs">
             <a
               href="https://wa.me/5561984038961"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-2 py-3 rounded-xl text-sm font-bold font-kids text-center shadow-lg active:scale-95 transition-transform"
+              className="flex items-center justify-center space-x-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-6 py-4 rounded-full text-xl font-bold font-kids text-center shadow-lg active:scale-95 transition-transform w-full"
             >
-              <MessageCircle size={20} className="animate-bounce-gentle" />
+              <MessageCircle size={24} className="animate-bounce-gentle" />
               <span>Reservar</span>
             </a>
           </div>
