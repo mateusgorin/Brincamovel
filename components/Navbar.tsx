@@ -89,43 +89,59 @@ const Navbar: React.FC = () => {
 
           <div className="md:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(true)}
               className="inline-flex items-center justify-center p-2 rounded-md text-pink-500 hover:text-pink-600 focus:outline-none"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              <Menu size={28} />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden bg-white border-b border-pink-100 absolute top-full left-0 w-full shadow-xl">
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-gray-800 hover:text-pink-500 block px-3 py-4 rounded-md text-lg font-medium font-kids border-b border-gray-50 last:border-0"
-              >
-                {item.name}
-              </a>
-            ))}
-            <div className="pt-4">
-              <a
-                href="https://wa.me/5561984038961"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center space-x-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-4 rounded-2xl text-lg font-bold font-kids text-center shadow-lg active:scale-95 transition-transform"
-              >
-                <MessageCircle size={22} className="animate-bounce-gentle" />
-                <span>Reservar pelo WhatsApp</span>
-              </a>
-            </div>
+        <div 
+          className="md:hidden fixed inset-0 bg-black/20 z-[55] backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu Drawer */}
+      <div 
+        className={`md:hidden fixed top-0 right-0 w-1/2 h-screen bg-white shadow-2xl z-[60] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="flex justify-end items-center p-4 h-20 border-b border-pink-100">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 text-pink-500 hover:text-pink-600 focus:outline-none"
+          >
+            <X size={28} />
+          </button>
+        </div>
+        <div className="px-3 py-4 space-y-1 overflow-y-auto h-[calc(100vh-80px)]">
+          {menuItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              className="text-gray-800 hover:text-pink-500 block px-2 py-3 rounded-md text-base font-medium font-kids border-b border-gray-50 last:border-0"
+            >
+              {item.name}
+            </a>
+          ))}
+          <div className="pt-6">
+            <a
+              href="https://wa.me/5561984038961"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-2 py-3 rounded-xl text-sm font-bold font-kids text-center shadow-lg active:scale-95 transition-transform"
+            >
+              <MessageCircle size={20} className="animate-bounce-gentle" />
+              <span>Reservar</span>
+            </a>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

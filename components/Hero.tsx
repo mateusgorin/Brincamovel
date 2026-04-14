@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="flex-1 relative w-full flex justify-center mt-[15px] md:mt-8 lg:mt-0"
+            className="hidden md:flex flex-1 relative w-full justify-center mt-[15px] md:mt-8 lg:mt-0"
           >
             <div className={`relative z-10 w-[230px] h-auto sm:w-full sm:max-w-[320px] md:max-w-[420px] aspect-auto sm:aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 sm:border-[8px] md:border-[12px] border-white transition-all duration-500 hover:scale-[1.02] bg-white p-0 ${!imageLoaded ? 'shimmer-bg' : ''} animate-bounce-gentle`} style={{ animationDuration: '3.5s' }}>
               <img 
